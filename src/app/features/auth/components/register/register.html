@@ -1,0 +1,490 @@
+<div class="register-container">
+
+  <!-- Title -->
+  <h1>Create your account 🐾</h1>
+
+  <p class="subtitle">
+    Join LoveFound and help give animals a second chance.
+  </p>
+
+
+  <!-- ========================= -->
+  <!-- ROLE SELECTOR -->
+  <!-- ========================= -->
+
+  <div class="role-selector">
+
+    <button
+      type="button"
+      [class.active]="selectedRole === 'ADOPTER'"
+      (click)="selectRole('ADOPTER')"
+    >
+      Adopter
+    </button>
+
+    <button
+      type="button"
+      [class.active]="selectedRole === 'SHELTER'"
+      (click)="selectRole('SHELTER')"
+    >
+      Shelter
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- ADOPTER FORM -->
+  <!-- ========================= -->
+
+  @if (selectedRole === 'ADOPTER') {
+
+    <form
+      [formGroup]="adopterForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <!-- First name -->
+      <div class="form-group">
+
+        <label for="firstName">
+          First name
+        </label>
+
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          placeholder="Enter your first name"
+        />
+
+        @if (
+          adopterForm.controls.firstName.touched &&
+          adopterForm.controls.firstName.hasError('required')
+        ) {
+          <small class="error">
+            First name is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Last name -->
+      <div class="form-group">
+
+        <label for="lastName">
+          Last name
+        </label>
+
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          placeholder="Enter your last name"
+        />
+
+        @if (
+          adopterForm.controls.lastName.touched &&
+          adopterForm.controls.lastName.hasError('required')
+        ) {
+          <small class="error">
+            Last name is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label for="adopterEmail">
+          Email
+        </label>
+
+        <input
+          id="adopterEmail"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        @if (
+          adopterForm.controls.email.touched &&
+          adopterForm.controls.email.hasError('required')
+        ) {
+          <small class="error">
+            Email is required.
+          </small>
+        }
+
+        @if (
+          adopterForm.controls.email.touched &&
+          adopterForm.controls.email.hasError('email')
+        ) {
+          <small class="error">
+            Please enter a valid email address.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Password -->
+      <div class="form-group">
+
+        <label for="adopterPassword">
+          Password
+        </label>
+
+        <input
+          id="adopterPassword"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (
+          adopterForm.controls.password.touched &&
+          adopterForm.controls.password.hasError('required')
+        ) {
+          <small class="error">
+            Password is required.
+          </small>
+        }
+
+        @if (
+          adopterForm.controls.password.touched &&
+          adopterForm.controls.password.hasError('minlength')
+        ) {
+          <small class="error">
+            Password must be at least 8 characters long.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Phone number -->
+      <div class="form-group">
+
+        <label for="adopterPhoneNumber">
+          Phone number
+        </label>
+
+        <input
+          id="adopterPhoneNumber"
+          type="tel"
+          formControlName="phoneNumber"
+          placeholder="Enter your phone number"
+        />
+
+        @if (
+          adopterForm.controls.phoneNumber.touched &&
+          adopterForm.controls.phoneNumber.hasError('required')
+        ) {
+          <small class="error">
+            Phone number is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- City -->
+      <div class="form-group">
+
+        <label for="adopterCity">
+          City
+        </label>
+
+        <input
+          id="adopterCity"
+          type="text"
+          formControlName="city"
+          placeholder="Enter your city"
+        />
+
+        @if (
+          adopterForm.controls.city.touched &&
+          adopterForm.controls.city.hasError('required')
+        ) {
+          <small class="error">
+            City is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Submit -->
+      <button
+        class="auth-button"
+        type="submit"
+      >
+        Create adopter account
+      </button>
+
+    </form>
+
+  }
+
+
+  <!-- ========================= -->
+  <!-- SHELTER FORM -->
+  <!-- ========================= -->
+
+  @if (selectedRole === 'SHELTER') {
+
+    <form
+      [formGroup]="shelterForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <!-- Shelter name -->
+      <div class="form-group">
+
+        <label for="shelterName">
+          Shelter name
+        </label>
+
+        <input
+          id="shelterName"
+          type="text"
+          formControlName="shelterName"
+          placeholder="Enter shelter name"
+        />
+
+        @if (
+          shelterForm.controls.shelterName.touched &&
+          shelterForm.controls.shelterName.hasError('required')
+        ) {
+          <small class="error">
+            Shelter name is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label for="shelterEmail">
+          Email
+        </label>
+
+        <input
+          id="shelterEmail"
+          type="email"
+          formControlName="email"
+          placeholder="Enter shelter email"
+        />
+
+        @if (
+          shelterForm.controls.email.touched &&
+          shelterForm.controls.email.hasError('required')
+        ) {
+          <small class="error">
+            Email is required.
+          </small>
+        }
+
+        @if (
+          shelterForm.controls.email.touched &&
+          shelterForm.controls.email.hasError('email')
+        ) {
+          <small class="error">
+            Please enter a valid email address.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Password -->
+      <div class="form-group">
+
+        <label for="shelterPassword">
+          Password
+        </label>
+
+        <input
+          id="shelterPassword"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (
+          shelterForm.controls.password.touched &&
+          shelterForm.controls.password.hasError('required')
+        ) {
+          <small class="error">
+            Password is required.
+          </small>
+        }
+
+        @if (
+          shelterForm.controls.password.touched &&
+          shelterForm.controls.password.hasError('minlength')
+        ) {
+          <small class="error">
+            Password must be at least 8 characters long.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Phone number -->
+      <div class="form-group">
+
+        <label for="shelterPhoneNumber">
+          Phone number
+        </label>
+
+        <input
+          id="shelterPhoneNumber"
+          type="tel"
+          formControlName="phoneNumber"
+          placeholder="Enter phone number"
+        />
+
+        @if (
+          shelterForm.controls.phoneNumber.touched &&
+          shelterForm.controls.phoneNumber.hasError('required')
+        ) {
+          <small class="error">
+            Phone number is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Address -->
+      <div class="form-group">
+
+        <label for="address">
+          Address
+        </label>
+
+        <input
+          id="address"
+          type="text"
+          formControlName="address"
+          placeholder="Enter shelter address"
+        />
+
+        @if (
+          shelterForm.controls.address.touched &&
+          shelterForm.controls.address.hasError('required')
+        ) {
+          <small class="error">
+            Address is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- City -->
+      <div class="form-group">
+
+        <label for="shelterCity">
+          City
+        </label>
+
+        <input
+          id="shelterCity"
+          type="text"
+          formControlName="city"
+          placeholder="Enter shelter city"
+        />
+
+        @if (
+          shelterForm.controls.city.touched &&
+          shelterForm.controls.city.hasError('required')
+        ) {
+          <small class="error">
+            City is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Description -->
+      <div class="form-group">
+
+        <label for="description">
+          Description
+        </label>
+
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Tell us about your shelter..."
+          rows="4"
+        ></textarea>
+
+        @if (
+          shelterForm.controls.description.touched &&
+          shelterForm.controls.description.hasError('required')
+        ) {
+          <small class="error">
+            Description is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Submit -->
+      <button
+        class="auth-button"
+        type="submit"
+      >
+        Create shelter account
+      </button>
+
+    </form>
+
+  }
+
+
+  <!-- ========================= -->
+  <!-- SERVER ERROR -->
+  <!-- ========================= -->
+
+  @if (errorMessage) {
+
+    <p class="error server-error">
+      {{ errorMessage }}
+    </p>
+
+  }
+
+
+  <!-- ========================= -->
+  <!-- LOGIN LINK -->
+  <!-- ========================= -->
+
+  <div class="auth-switch">
+
+    <span>
+      Already have an account?
+    </span>
+
+    <button
+      type="button"
+      (click)="goToLogin()"
+    >
+      Login
+    </button>
+
+  </div>
+
+</div>

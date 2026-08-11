@@ -1,0 +1,25 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-content">
+
+      @if (!isRegisterMode) {
+
+        <app-login
+          (registerClicked)="showRegister()">
+        </app-login>
+
+      } @else {
+
+        <app-register
+          (loginClicked)="showLogin()">
+        </app-register>
+
+      }
+    
+    </div>
+
+  </div>
+
+</div>

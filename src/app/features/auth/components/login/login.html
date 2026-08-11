@@ -1,0 +1,83 @@
+<div class="form-container">
+    <h1>Welcome Back</h1>
+    <p>Login to your LoveFound account</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!--email-->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="Enter your email"
+            />
+            @if (loginForm.controls.email.touched &&
+                loginForm.controls.email.hasError('required')) 
+            {
+                <small class="error">
+                Email is required
+                </small>
+            }
+
+            @if (loginForm.controls.email.touched &&
+                loginForm.controls.email.hasError('email')) {
+                <small class="error">
+                Please enter a valid email
+                </small>
+            }
+        </div>
+
+        <!--password-->
+        <div class="form-group">
+            <label for="password"></label>
+            <input
+                id="password"
+                type="password"
+                formControlName="password"
+                placeholder="Enter your password"
+            />
+
+            @if (loginForm.controls.password.touched &&
+                loginForm.controls.password.hasError('required')) 
+            {
+                <small class="error">
+                password is required
+                </small>
+            }
+            @if (loginForm.controls.password.touched &&
+                loginForm.controls.password.hasError('minlength')) 
+            {
+                <small class="error">
+                password must be at least 8 characters long
+                </small>
+            }
+        </div>
+        <!--backend error msg-->
+        @if(errorMessage)
+        {
+            <div class="error">
+                {{errorMessage}}
+            </div>
+        }
+
+        <!--login button-->
+        <button class="auth-button" type="submit">
+            Login
+        </button>
+
+        <!--switch to register-->
+        <p class="switch-auth">
+
+        Don't have an account? find your love now 
+
+        <button type="button" class="auth-button" (click)="goToRegister()">
+            Register
+        </button>
+
+        </p>
+
+    </form>
+
+</div>

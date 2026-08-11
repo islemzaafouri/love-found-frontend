@@ -1,0 +1,41 @@
+.register-container {
+  width: 100%;
+}
+
+.register-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--brown);
+  margin-bottom: 25px;
+}
+
+.role-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.role-selector button {
+  flex: 1;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--white);
+  color: var(--brown);
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+.role-selector button.active {
+  background: var(--brown);
+  color: var(--white);
+}
