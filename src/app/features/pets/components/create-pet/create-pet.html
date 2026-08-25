@@ -1,0 +1,27 @@
+<div class="create-pet-page">
+
+  <div class="create-pet-card">
+
+    <div class="form-header">
+      <p class="eyebrow">Give a little soul a chance 🐾</p>
+
+      <h1>Add a new friend</h1>
+
+      <p>
+        Tell us about this special pet and help them find their forever home.
+      </p>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <app-pet-form 
+      (formSubmit)="createPet($event)"
+    />
+
+  </div>
+
+</div>

@@ -65,7 +65,7 @@ export class LoginComponent {
           this.errorMessage =
             error.error?.message ||
             'login failed , check your email and password and  Please try again.';
-            this.cdr.detectChanges();   // <-- add this line
+            this.cdr.detectChanges();   
         }
     });
 

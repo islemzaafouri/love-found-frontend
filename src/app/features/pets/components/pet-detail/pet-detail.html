@@ -1,0 +1,195 @@
+<div class="pet-detail-page">
+
+  <!-- Back button -->
+  <a routerLink="/pets" class="back-link">
+    ← Back to all pets
+  </a>
+
+
+  <!-- Loading -->
+  @if (isLoading) {
+
+    <div class="state-message">
+      <div class="state-icon">🐾</div>
+
+      <h2>Getting to know this little soul...</h2>
+
+      <p>
+        We're bringing their story to you.
+      </p>
+    </div>
+
+  }
+
+
+  <!-- Error -->
+  @if (!isLoading && errorMessage) {
+
+    <div class="state-message error">
+
+      <div class="state-icon">🤍</div>
+
+      <h2>We couldn't find this little one</h2>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+
+      <a routerLink="/pets" class="back-button">
+        Back to pets
+      </a>
+
+    </div>
+
+  }
+
+
+  <!-- Pet successfully loaded -->
+  @if (!isLoading && pet) {
+
+    <article class="pet-detail-card">
+
+      <!-- Main introduction -->
+      <section class="pet-intro">
+
+        <div class="pet-image-wrapper">
+
+          <img
+            [src]="pet.photoUrl || 'assets/placeholder-pet.png'"
+            [alt]="pet.name"
+            class="pet-photo"
+            loading="lazy"
+          />
+
+        </div>
+
+
+        <div class="pet-intro-info">
+
+          <p class="eyebrow">
+            A little soul looking for a home
+          </p>
+
+          <h1>
+            Meet {{ pet.name }} 🐾
+          </h1>
+
+          <p class="pet-meta">
+            {{ pet.gender | titlecase }}
+            ·
+            {{ pet.age }}
+            {{ pet.age === 1 ? 'year' : 'years' }}
+            old
+          </p>
+
+          <p class="breed">
+            {{ pet.breed }}
+          </p>
+
+
+          @if (pet.description) {
+
+            <p class="pet-description">
+              {{ pet.description }}
+            </p>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- Personality -->
+      @if (pet.personalityTraits?.length) {
+
+        <section class="pet-section">
+
+          <p class="eyebrow">A little about {{ pet.name }}</p>
+
+          <h2>
+            Personality
+          </h2>
+
+          <div class="traits">
+
+            @for (trait of pet.personalityTraits; track trait) {
+
+              <span class="trait">
+                {{ trait | titlecase }}
+              </span>
+
+            }
+
+          </div>
+
+        </section>
+
+      }
+
+
+      <!-- Rescue story -->
+      @if (pet.rescueStory) {
+
+        <section class="pet-section rescue-story">
+
+          <p class="eyebrow">
+            Where their story began
+          </p>
+
+          <h2>
+            {{ pet.name }}'s rescue story
+          </h2>
+
+          <p>
+            {{ pet.rescueStory }}
+          </p>
+
+        </section>
+
+      }
+
+
+      <!-- Adoption CTA -->
+      <section class="adoption-section">
+
+        <p class="eyebrow">
+          Maybe this is where your stories meet
+        </p>
+
+        <h2>
+          Could you be {{ pet.name }}'s forever home? 🤎
+        </h2>
+
+        <p>
+          {{ pet.name }} is waiting for someone who will give
+          them the love, safety and happiness they deserve.
+        </p>
+
+        <button class="adopt-button">
+          I want to meet {{ pet.name }}
+        </button>
+
+      </section>
+
+      @if (isShelterOwner) {
+      <div class="pet-actions">
+        <button
+          class="update-button"
+          [routerLink]="['/pets', 'update',pet.id]">
+          Edit pet
+        </button>
+
+        <button
+          class="deactivate-button"
+          (click)="deactivatePet(pet.id)">
+          Deactivate pet
+        </button>
+      </div>
+    }
+
+    </article>
+
+  }
+
+</div>

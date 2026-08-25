@@ -18,6 +18,9 @@ export class AuthService {
     private API_URL = 'http://localhost:8080/api/auth';
 
     currentUser=signal<UserModel | null>(this.loadUserFromStorage());
+    getCurrentUser(): UserModel | null {
+        return this.currentUser();
+    }
 
     login (request:LoginRequest):Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.API_URL}/login`, request)
@@ -49,7 +52,7 @@ export class AuthService {
 
     private SaveSession(authResponse: AuthResponse): void {
         this.tokenService.saveToken(authResponse.token);
-        const user: UserModel = { email: authResponse.email, role: authResponse.role };
+        const user: UserModel = { email: authResponse.email, role: authResponse.role,profileId: authResponse.profileId };
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUser.set(user);
     }

@@ -1,0 +1,323 @@
+.pet-detail-page {
+  min-height: 100vh;
+  padding: 40px 7%;
+  font-family: 'Alice', serif;
+  color: var(--brown-dark);
+}
+
+/* ---------- BACK LINK ---------- */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 30px;
+
+  color: var(--brown);
+  text-decoration: none;
+  font-size: 1rem;
+
+  transition: color 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    color: var(--brown-dark);
+    transform: translateX(-4px);
+  }
+}
+
+
+/* ---------- MAIN CARD ---------- */
+
+.pet-detail-card {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  background: var(--white);
+  border-radius: 24px;
+
+  box-shadow: 0 8px 30px rgba(80, 55, 35, 0.12);
+
+  overflow: hidden;
+
+  animation: fadeIn 0.5s ease;
+}
+
+
+/* ---------- INTRO ---------- */
+
+.pet-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+
+  padding: 40px;
+  align-items: center;
+}
+
+.pet-image-wrapper {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.pet-photo {
+  width: 100%;
+  height: 450px;
+
+  display: block;
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.pet-image-wrapper:hover .pet-photo {
+  transform: scale(1.03);
+}
+
+
+/* ---------- PET INFO ---------- */
+
+.eyebrow {
+  margin: 0 0 10px;
+
+  color: var(--brown);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.pet-intro-info h1 {
+  margin: 0 0 12px;
+
+  color: var(--brown-dark);
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.pet-meta {
+  margin: 0 0 6px;
+
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.breed {
+  margin: 0 0 22px;
+
+  color: var(--brown);
+  font-size: 1.05rem;
+}
+
+.pet-description {
+  max-width: 500px;
+
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+
+/* ---------- SECTIONS ---------- */
+
+.pet-section {
+  padding: 40px;
+
+  border-top: 1px solid rgba(80, 55, 35, 0.1);
+}
+
+.pet-section h2 {
+  margin: 0 0 20px;
+
+  color: var(--brown-dark);
+  font-size: 2rem;
+}
+
+
+/* ---------- PERSONALITY TRAITS ---------- */
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trait {
+  padding: 9px 16px;
+
+  background: var(--beige-light);
+  color: var(--brown-dark);
+
+  border-radius: 20px;
+
+  font-size: 0.95rem;
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.trait:hover {
+  transform: translateY(-2px);
+  background: var(--beige);
+}
+
+
+/* ---------- RESCUE STORY ---------- */
+
+.rescue-story {
+  background: rgba(245, 237, 225, 0.45);
+}
+
+.rescue-story p:last-child {
+  max-width: 850px;
+
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+
+/* ---------- ADOPTION SECTION ---------- */
+
+.adoption-section {
+  padding: 50px 40px;
+
+  text-align: center;
+
+  background: var(--beige-light);
+}
+
+.adoption-section h2 {
+  margin: 0 auto 15px;
+
+  max-width: 650px;
+
+  color: var(--brown-dark);
+  font-size: 2rem;
+}
+
+.adoption-section > p:not(.eyebrow) {
+  max-width: 600px;
+  margin: 0 auto 25px;
+
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+
+/* ---------- ADOPT BUTTON ---------- */
+
+.adopt-button,
+.back-button,.deactivate-button,.update-button {
+  display: inline-block;
+
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: var(--brown);
+  color: var(--white);
+
+  font-family: inherit;
+  font-size: 1rem;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.adopt-button:hover,
+.back-button:hover {
+  background: var(--brown-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 15px rgba(80, 55, 35, 0.18);
+}
+
+
+/* ---------- LOADING / ERROR ---------- */
+
+.state-message {
+  max-width: 550px;
+
+  margin: 80px auto;
+  padding: 40px 25px;
+
+  text-align: center;
+
+  background: var(--white);
+
+  border-radius: 20px;
+
+  box-shadow: 0 6px 20px rgba(80, 55, 35, 0.1);
+
+  animation: fadeIn 0.4s ease;
+}
+
+.state-icon {
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+}
+
+.state-message h2 {
+  margin-bottom: 10px;
+}
+
+.state-message p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.error {
+  color: var(--brown-dark);
+}
+
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+
+  .pet-detail-page {
+    padding: 30px 5%;
+  }
+
+  .pet-intro {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 25px;
+  }
+
+  .pet-photo {
+    height: 350px;
+  }
+
+  .pet-intro-info h1 {
+    font-size: 2.3rem;
+  }
+
+  .pet-section {
+    padding: 30px 25px;
+  }
+
+  .adoption-section {
+    padding: 40px 25px;
+  }
+}

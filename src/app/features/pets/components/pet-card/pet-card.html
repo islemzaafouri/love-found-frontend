@@ -1,0 +1,26 @@
+<div class="pet-card">
+
+  <img
+    [src]="pet.photoUrl || 'assets/placeholder-pet.png'"
+    [alt]="pet.name"
+    class="pet-photo"
+    loading="lazy"
+    onerror="this.src='assets/placeholder-pet.png'"
+  />
+
+  <div class="pet-info">
+
+    <h3>{{ pet.name }}</h3>
+
+    <p class="pet-meta">
+      {{ pet.gender | titlecase }} · 
+      {{ pet.age }} {{ pet.age === 1 ? 'year' : 'years' }} old
+    </p>
+
+    <a [routerLink]="['/pets', pet.id]" class="view-details">
+      Get to know little {{ pet.name }}
+    </a>
+
+  </div>
+
+</div>

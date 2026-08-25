@@ -1,0 +1,55 @@
+.update-pet-page {
+  min-height: 100vh;
+  padding: 50px 7%;
+
+  font-family: 'Alice', serif;
+  color: var(--brown-dark);
+}
+
+
+/* ---------- CARD ---------- */
+
+.update-pet-card {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 45px;
+
+  background: var(--white);
+  border-radius: 24px;
+
+  box-shadow: 0 8px 30px rgba(80, 55, 35, 0.12);
+
+  animation: fadeIn 0.5s ease;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.form-header {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--brown);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.form-header h1 {
+  margin: 0 0 12px;
+
+  color: var(--brown-dark);
+  font-size: 2.5rem;
+}
+
+.form-header p:last-child {
+  margin: 0 auto;
+
+  max-width: 550px;
+
+  color: var(--text-muted);
+  line-height: 1.6;
+}

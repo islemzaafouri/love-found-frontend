@@ -1,0 +1,124 @@
+<div class="pet-list-page">
+
+  <section class="hero">
+    <p class="eyebrow">Every pet has a story</p>
+    <h1>
+      Maybe your best friend<br>
+      is waiting for you. 🐾
+    </h1>
+    <p class="hero-text">
+      Behind every pair of eyes is a little story —
+      a life that deserves love, safety, and a place to call home.
+      Take your time. Your perfect companion might be here.
+    </p>
+  </section>
+
+  @if (isLoading) {
+    <div class="state-message">
+      <p class="state-icon">🐾</p>
+      <h2>Looking for your little love...</h2>
+      <p>
+        We're finding the pets who are waiting for their forever home.
+      </p>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="state-message error">
+      <p class="state-icon">⚠️</p>
+      <h2>Something went wrong</h2>
+      <p>{{ errorMessage }}</p>
+    </div>
+  }
+
+
+  <!-- Search / Filter -->
+  <div class="pet-search">
+    <div class="search-field">
+      <label for="species">I'm looking for a...</label>
+
+      <select
+        id="species"
+        [(ngModel)]="selectedSpecies"
+        (change)="searchBySpecies()"
+      >
+        <option value="">
+          All pets 🐾
+        </option>
+
+        @for (item of species; track item) {
+          <option [value]="item">
+            {{ item | titlecase }}
+          </option>
+        }
+
+      </select>
+
+    </div>
+
+    @if (selectedSpecies) {
+
+      <button
+        type="button"
+        class="clear-button"
+        (click)="clearSearch()"
+      >
+        Show all
+      </button>
+
+    }
+
+  </div>
+
+
+  @if (!isLoading && !errorMessage && pets.length === 0) {
+
+  <div class="state-message empty">
+
+    <!-- Scenario 1: User filtered by species, but found 0 results -->
+    @if (selectedSpecies) {
+
+      <h2>No {{ selectedSpecies | titlecase }}s found 💔</h2>
+
+      <p>
+        We couldn't find any {{ selectedSpecies | lowercase }}s matching your search right now. 
+        Try looking for another species or clear the filter.
+      </p>
+
+    } 
+    <!-- Scenario 2: The entire database/list is empty -->
+    @else {
+
+      <h2>No pets available right now 🐾</h2>
+
+      <p>
+        All of our little friends have found their forever homes! 
+        Please check back soon for new arrivals.
+      </p>
+
+    }
+
+  </div>
+
+}
+
+  @if (!isLoading && !errorMessage && pets.length > 0) {
+    <section class="pets-section">
+      <div class="section-heading">
+        <p class="eyebrow">Meet them</p>
+        <h2>
+          Hearts looking for a home
+        </h2>
+        <p>
+          Each one has a story. Maybe you'll be the next chapter.
+        </p>
+      </div>
+      <div class="pet-grid">
+        @for (pet of pets; track pet.id) {
+          <app-pet-card [pet]="pet" />
+        }
+      </div>
+    </section>
+  }
+
+</div>

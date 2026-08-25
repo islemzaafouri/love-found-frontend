@@ -1,0 +1,238 @@
+
+<!-- Form -->
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+
+      <!-- Name -->
+      <div class="form-group">
+
+        <label for="name">Pet name</label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Alex"
+        />
+
+        @if (
+          petForm.controls.name.touched &&
+          petForm.controls.name.invalid
+        ) {
+          <small class="field-error">
+            Pet name is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Species + Gender -->
+      <div class="form-row">
+
+        <!-- Species -->
+        <div class="form-group">
+
+          <label for="species">Species</label>
+
+          <select
+            id="species"
+            formControlName="species"
+          >
+            @for (species of species; track species) {
+              <option [value]="species">
+                {{ species | titlecase }}
+              </option>
+            }
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="age">Age</label>
+
+            <input
+            id="age"
+            type="number"
+            formControlName="age"
+            min="0"
+            placeholder="e.g. 3"
+            />
+
+            @if (
+            petForm.controls.age.touched &&
+            petForm.controls.age.hasError('required')
+            ) {
+            <small class="field-error">
+                Age is required.
+            </small>
+            }
+
+            @if (
+            petForm.controls.age.touched &&
+            petForm.controls.age.hasError('min')
+            ) {
+            <small class="field-error">
+                Age cannot be negative.
+            </small>
+            }
+
+        </div>
+
+
+        <!-- Gender -->
+        <div class="form-group">
+
+          <label for="gender">Gender</label>
+
+          <select
+            id="gender"
+            formControlName="gender"
+          >
+            @for (gender of genders; track gender) {
+              <option [value]="gender">
+                {{ gender | titlecase }}
+              </option>
+            }
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- Breed -->
+      <div class="form-group">
+
+        <label for="breed">Breed</label>
+
+        <input
+          id="breed"
+          type="text"
+          formControlName="breed"
+          placeholder="e.g. Labrador"
+        />
+
+        @if (
+          petForm.controls.breed.touched &&
+          petForm.controls.breed.invalid
+        ) {
+          <small class="field-error">
+            Breed is required.
+          </small>
+        }
+
+      </div>
+        <label for="photo">photo</label>
+        <input
+          id="photoUrl"
+          type="url"
+          formControlName="photoUrl"
+          placeholder="https://example.com/alex.jpg"
+        />
+
+        @if (
+          petForm.controls.photoUrl.touched &&
+          petForm.controls.photoUrl.hasError('required')
+        ) {
+          <small class="field-error">
+            A photo URL is required.
+          </small>
+        }
+
+
+      <!-- Personality -->
+      <div class="form-group">
+
+        <label>Personality traits</label>
+
+        <p class="field-hint">
+          Choose the traits that best describe this little heart.
+        </p>
+
+        <div class="traits">
+
+          @for (trait of personalityTraits; track trait) {
+
+            <button
+              type="button"
+              class="trait"
+              [class.selected]="isTraitSelected(trait)"
+              (click)="toggleTrait(trait)"
+            >
+              {{ trait | titlecase }}
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- Rescue Story -->
+      <div class="form-group">
+
+        <label for="rescueStory">Rescue story</label>
+
+        <textarea
+          id="rescueStory"
+          formControlName="rescueStory"
+          rows="6"
+          placeholder="Tell the story of how this pet was rescued..."
+        ></textarea>
+
+        @if (
+          petForm.controls.rescueStory.touched &&
+          petForm.controls.rescueStory.invalid
+        ) {
+          <small class="field-error">
+            Please tell us this pet's rescue story.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Description -->
+      <div class="form-group">
+
+        <label for="description">A little description</label>
+
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          placeholder="Tell potential adopters what makes this pet special..."
+        ></textarea>
+
+        @if (
+          petForm.controls.description.touched &&
+          petForm.controls.description.invalid
+        ) {
+          <small class="field-error">
+            A description is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Submit -->
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="submit-button"
+        >
+            @if (pet) {
+            Update this little heart 🐾
+            } @else {
+              Add this little heart 🐾
+            }
+        </button>
+
+      </div>
+
+</form>
+

@@ -1,0 +1,272 @@
+.pet-list-page {
+  min-height: 100vh;
+  padding: 60px 7%;
+  font-family: 'Alice', serif;
+  color: var(--brown-dark);
+}
+
+
+/* ---------- HERO ---------- */
+
+.hero {
+  max-width: 750px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: var(--brown);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  margin: 0 0 20px;
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.hero-text {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+
+/* ---------- PET SECTION ---------- */
+
+.pets-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.section-heading p:last-child {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+
+/* ---------- PET GRID ---------- */
+
+.pet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+
+/* ---------- LOADING / EMPTY / ERROR ---------- */
+
+.state-message {
+  max-width: 550px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 40px 25px;
+
+  background: var(--white);
+  border-radius: 20px;
+
+  box-shadow: 0 6px 20px rgba(80, 55, 35, 0.1);
+
+  animation: fadeIn 0.4s ease;
+}
+
+.state-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.state-message h2 {
+  margin-bottom: 10px;
+}
+
+.state-message p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.error {
+  color: var(--brown-dark);
+}
+
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+
+  .pet-list-page {
+    padding: 40px 5%;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .pet-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================
+   Species Filter
+   ========================= */
+
+.pet-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+
+  max-width: 700px;
+  margin: 2.5rem auto 3rem;
+  padding: 1.25rem 1.5rem;
+
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(91, 67, 54, 0.12);
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(91, 67, 54, 0.08);
+
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+
+  &:hover {
+    box-shadow: 0 10px 30px rgba(91, 67, 54, 0.12);
+  }
+}
+
+
+/* Label + select */
+
+.search-field {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.search-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #5b4336;
+}
+
+
+/* Dropdown */
+
+.search-field select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #4a382f;
+
+  background-color: #fffaf5;
+
+  border: 1px solid #d8c5b7;
+  border-radius: 12px;
+
+  outline: none;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    border-color: #a9785e;
+  }
+
+  &:focus {
+    border-color: #8b5e46;
+    background-color: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(139, 94, 70, 0.12);
+  }
+}
+
+
+/* Show all button */
+
+.clear-button {
+  flex-shrink: 0;
+
+  padding: 0.85rem 1.25rem;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: #8b5e46;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #744b37;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(91, 67, 54, 0.18);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .pet-search {
+    flex-direction: column;
+    align-items: stretch;
+
+    margin: 2rem 1rem;
+    padding: 1.1rem;
+  }
+
+  .clear-button {
+    width: 100%;
+  }
+}

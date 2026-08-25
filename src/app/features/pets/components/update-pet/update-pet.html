@@ -1,0 +1,45 @@
+<div class="update-pet-page">
+
+  <div class="update-pet-card">
+
+    <div class="form-header">
+      <p class="eyebrow">A little update 🐾</p>
+
+      <h1>Update your friend</h1>
+
+      <p>
+        Keep their story and information up to date.
+      </p>
+    </div>
+
+
+    @if (isLoading && !pet) {
+
+      <p class="loading-message">
+        Loading this little heart...
+      </p>
+
+    }
+
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    @if (pet) {
+
+      <app-pet-form
+        [pet]="pet"
+        (formSubmit)="updatePet($event)"
+      />
+
+    }
+
+  </div>
+
+</div>

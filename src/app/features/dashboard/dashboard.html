@@ -1,1 +1,191 @@
-<p>dashboard works!</p>
+<div class="dashboard-page">
+
+  <!-- ================= HEADER ================= -->
+  <section class="dashboard-hero">
+
+    <div class="hero-content">
+
+      <p class="eyebrow">
+        Welcome back 🐾
+      </p>
+
+      <h1>
+        Welcome,
+        <span>{{ shelterName }}</span>!
+      </h1>
+
+      <p class="hero-text">
+        Every day, you give little hearts a second chance.
+        Keep caring, keep helping, and together we'll find
+        each of them the loving home they deserve.
+      </p>
+
+    </div>
+
+    <div class="hero-decoration">
+      🐶 🐱 🐰
+    </div>
+
+  </section>
+
+
+  <!-- ================= QUICK ACTIONS ================= -->
+  <section class="dashboard-section">
+
+    <div class="section-heading">
+
+      <p class="eyebrow">
+        Your shelter
+      </p>
+
+      <h2>
+        What would you like to do?
+      </h2>
+
+    </div>
+
+
+    <div class="dashboard-cards">
+
+
+      <!-- MY PETS -->
+      <div class="dashboard-card">
+
+        <div class="card-icon">
+          🐾
+        </div>
+
+        <div class="card-content">
+
+          <h3>
+            My pets
+          </h3>
+
+          <p>
+            Manage the little souls currently under
+            your care and help them find their forever families.
+          </p>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="loadMyPets()"
+            [disabled]="isLoading"
+          >
+
+            @if (isLoading) {
+              Loading...
+            } @else {
+              See my pets
+              <span>→</span>
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ADD PET -->
+      <div class="dashboard-card">
+
+        <div class="card-icon">
+          💕
+        </div>
+
+        <div class="card-content">
+
+          <h3>
+            Add a new friend
+          </h3>
+
+          <p>
+            A new pet has arrived? Give them a profile
+            and start their journey toward a loving home.
+          </p>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="goToCreatePet()"
+          >
+            Add a pet
+            <span>+</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- APPLICATIONS -->
+      <div class="dashboard-card">
+
+        <div class="card-icon">
+          💌
+        </div>
+
+        <div class="card-content">
+
+          <h3>
+            Adoption applications
+          </h3>
+
+          <p>
+            See the people who opened their hearts
+            and want to give one of your pets a home.
+          </p>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="goToApplications()"
+          >
+            View applications
+            <span>→</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MOTIVATIONAL SECTION ================= -->
+  <section class="dashboard-message">
+
+    <div class="message-icon">
+      ❤️
+    </div>
+
+    <div>
+
+      <h2>
+        Every pet has a story.
+      </h2>
+
+      <p>
+        And you're helping write the part where
+        their story finally gets a happy ending.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= ERROR ================= -->
+  @if (errorMessage) {
+
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  }
+
+</div>
