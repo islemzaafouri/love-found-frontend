@@ -19,6 +19,7 @@ export class LoginComponent {
   goToRegister(): void {
   this.registerClicked.emit();
   }
+  
   private cdr = inject(ChangeDetectorRef);
   private fb=inject(FormBuilder); 
   

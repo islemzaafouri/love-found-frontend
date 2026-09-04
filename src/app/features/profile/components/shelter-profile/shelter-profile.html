@@ -1,0 +1,327 @@
+<div class="shelter-profile-page">
+
+  <!-- ================= HEADER ================= -->
+  <section class="profile-header">
+
+    <div class="profile-header-content">
+
+      <p class="eyebrow">
+        Your shelter 🐾
+      </p>
+
+      @if (profile) {
+        <h1>
+          Welcome,
+          <span>{{ profile.shelterName }}</span>!
+        </h1>
+      } @else {
+        <h1>
+          Your shelter profile
+        </h1>
+      }
+
+      <p>
+        Keep your shelter information up to date so adopters
+        can learn more about the people helping these little
+        hearts find their forever homes.
+      </p>
+
+    </div>
+
+    <div class="profile-decoration">
+      🐶 🐱 🐰
+    </div>
+
+  </section>
+
+
+  <!-- ================= LOADING ================= -->
+  @if (isLoading) {
+
+    <div class="loading-message">
+      <span>🐾</span>
+      Loading your profile...
+    </div>
+
+  }
+
+
+  <!-- ================= ERROR ================= -->
+  @if (errorMessage) {
+
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  }
+
+
+  <!-- ================= PROFILE ================= -->
+  @if (!isLoading && profile) {
+
+    <section class="profile-card">
+
+      <!-- Card header -->
+      <div class="profile-card-header">
+
+        <div>
+          <p class="eyebrow">
+            Shelter information
+          </p>
+
+          <h2>
+            Your profile
+          </h2>
+        </div>
+
+        @if (!isEditing) {
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="startEditing()"
+          >
+            Edit profile
+          </button>
+
+        }
+
+      </div>
+
+
+      <!-- ================= FORM ================= -->
+      <form
+        [formGroup]="shelterForm"
+        (ngSubmit)="saveProfile()"
+      >
+
+        <!-- ================= BASIC INFORMATION ================= -->
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              Basic information
+            </h3>
+
+            <p>
+              Information about your shelter.
+            </p>
+
+          </div>
+
+
+          <!-- Shelter name -->
+          <div class="form-group">
+
+            <label for="shelterName">
+              Shelter name
+            </label>
+
+            <input
+              id="shelterName"
+              type="text"
+              formControlName="shelterName"
+              [readonly]="!isEditing"
+            />
+
+            @if (
+              shelterForm.controls.shelterName.touched &&
+              shelterForm.controls.shelterName.hasError('required')
+            ) {
+
+              <small class="field-error">
+                Shelter name is required.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- Phone + City -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="phoneNumber">
+                Phone number
+              </label>
+
+              <input
+                id="phoneNumber"
+                type="tel"
+                formControlName="phoneNumber"
+                [readonly]="!isEditing"
+              />
+
+              @if (
+                shelterForm.controls.phoneNumber.touched &&
+                shelterForm.controls.phoneNumber.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  Phone number is required.
+                </small>
+
+              }
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="city">
+                City
+              </label>
+
+              <input
+                id="city"
+                type="text"
+                formControlName="city"
+                [readonly]="!isEditing"
+              />
+
+              @if (
+                shelterForm.controls.city.touched &&
+                shelterForm.controls.city.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  City is required.
+                </small>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- Address -->
+          <div class="form-group">
+
+            <label for="address">
+              Address
+            </label>
+
+            <input
+              id="address"
+              type="text"
+              formControlName="address"
+              [readonly]="!isEditing"
+            />
+
+            @if (
+              shelterForm.controls.address.touched &&
+              shelterForm.controls.address.hasError('required')
+            ) {
+
+              <small class="field-error">
+                Address is required.
+              </small>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= DESCRIPTION ================= -->
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              About your shelter
+            </h3>
+
+            <p>
+              Tell adopters a little more about your shelter
+              and the work you do.
+            </p>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              formControlName="description"
+              rows="6"
+              [readonly]="!isEditing"
+              placeholder="Tell adopters about your shelter..."
+            ></textarea>
+
+            @if (
+              shelterForm.controls.description.touched &&
+              shelterForm.controls.description.hasError('required')
+            ) {
+
+              <small class="field-error">
+                Description is required.
+              </small>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= ACTIONS ================= -->
+        @if (isEditing) {
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="cancelEditing()"
+              [disabled]="isSaving"
+            >
+              Cancel
+            </button>
+
+
+            <button
+              type="submit"
+              class="primary-button"
+              [disabled]="isSaving"
+            >
+
+              @if (isSaving) {
+                Saving...
+              } @else {
+                Save changes
+              }
+
+            </button>
+
+          </div>
+
+        }
+
+      </form>
+
+
+      <!-- ================= SUCCESS ================= -->
+      @if (successMessage) {
+
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
+
+      }
+
+    </section>
+
+  }
+
+</div>

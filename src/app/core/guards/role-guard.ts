@@ -1,18 +1,25 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/AuthService';
-import { inject } from '@angular/core';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "../services/AuthService";
 
 export const roleGuard: CanActivateFn = (route) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const reuiredRole =route.data['role'];
+  // Cast as string[] to get proper array methods
+  const requiredRoles = route.data['role'] as string[];
   const user = authService.currentUser();
 
-  if(user&&user.role=== reuiredRole){
+  console.log('🔐 Role Guard');
+  console.log('Current user:', user);
+  console.log('Current role:', user?.role);
+  console.log('Allowed roles:', requiredRoles);
+
+  
+  if (user && requiredRoles.includes(user.role)) {
     return true;
   }
-  // Redirect to the login page if the user is not authenticated or does not have the required role
-  return router.createUrlTree(['/login']);
-  
+
+  // Redirect to /pets if unauthorized
+  return router.createUrlTree(['/pets']);
 };

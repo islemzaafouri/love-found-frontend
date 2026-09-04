@@ -11,7 +11,7 @@
 
       <h1>
         Welcome,
-        <span>{{ shelterName }}</span>!
+        <span>{{ shelter?.shelterName }}</span>!
       </h1>
 
       <p class="hero-text">
@@ -48,7 +48,7 @@
     <div class="dashboard-cards">
 
 
-      <!-- MY PETS -->
+      <!-- ================= MY PETS ================= -->
       <div class="dashboard-card">
 
         <div class="card-icon">
@@ -70,10 +70,10 @@
             type="button"
             class="primary-button"
             (click)="loadMyPets()"
-            [disabled]="isLoading"
+            [disabled]="isLoadingPets"
           >
 
-            @if (isLoading) {
+            @if (isLoadingPets) {
               Loading...
             } @else {
               See my pets
@@ -87,7 +87,7 @@
       </div>
 
 
-      <!-- ADD PET -->
+      <!-- ================= ADD PET ================= -->
       <div class="dashboard-card">
 
         <div class="card-icon">
@@ -117,9 +117,8 @@
         </div>
 
       </div>
-
-
-      <!-- APPLICATIONS -->
+    
+      <!-- ================= APPLICATIONS ================= -->
       <div class="dashboard-card">
 
         <div class="card-icon">
@@ -140,7 +139,6 @@
           <button
             type="button"
             class="secondary-button"
-            (click)="goToApplications()"
           >
             View applications
             <span>→</span>
@@ -148,12 +146,126 @@
 
         </div>
 
+      </div> 
+
+      <!-- ================= PROFILE SECTION ================= -->
+    <div class="dashboard-card">
+
+      <div class="profile-card">
+        <div class="card-icon">
+          👤
+        </div>
+        <div class="card-content">
+          <h3>Your profile</h3>
+          <p> Manage your shelter information and settings.</p>
+          <button
+            type="button"
+            (click)="goToProfile()"
+            class="secondary-button"
+          >
+            View profile
+            <span>→</span>
+          </button>
+
+        </div>
+
       </div>
-
-
+    </div>
     </div>
 
   </section>
+
+
+
+  <!-- ================= MY PETS ================= -->
+  @if (showPets) {
+
+    <section class="my-pets-section">
+
+      <div class="section-heading">
+
+        <p class="eyebrow">
+          The little hearts in your care 🐾
+        </p>
+
+        <h2>
+          Your pets
+        </h2>
+
+      </div>
+
+
+      <!-- Loading -->
+      @if (isLoadingPets) {
+
+        <p class="loading-message">
+          Looking for your pets...
+        </p>
+
+      }
+
+
+      <!-- Error -->
+      @if (petsErrorMessage) {
+
+        <div class="error-message">
+          {{ petsErrorMessage }}
+        </div>
+
+      }
+
+
+      <!-- No pets -->
+      @if (!isLoadingPets && !petsErrorMessage && pets.length === 0) {
+
+        <div class="empty-pets">
+
+          <div class="empty-pets-icon">
+            🐾
+          </div>
+
+          <h3>
+            No pets yet
+          </h3>
+
+          <p>
+            Your shelter doesn't have any pets listed yet.
+            Maybe it's time to give a new little friend
+            a story?
+          </p>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="goToCreatePet()"
+          >
+            Add a pet
+            <span>+</span>
+          </button>
+
+        </div>
+
+      }
+
+
+      <!-- Pets -->
+      @if (!isLoadingPets && !petsErrorMessage && pets.length > 0) {
+
+        <div class="pets-grid">
+
+          @for (pet of pets; track pet.id) {
+
+            <app-pet-card [pet]="pet" />
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  }
 
 
   <!-- ================= MOTIVATIONAL SECTION ================= -->
@@ -179,11 +291,11 @@
   </section>
 
 
-  <!-- ================= ERROR ================= -->
-  @if (errorMessage) {
+  <!-- ================= PROFILE ERROR ================= -->
+  @if (profileErrorMessage) {
 
     <div class="error-message">
-      {{ errorMessage }}
+      {{ profileErrorMessage }}
     </div>
 
   }

@@ -1,0 +1,511 @@
+/* =====================================================
+   DASHBOARD PAGE
+   ===================================================== */
+
+.dashboard-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.dashboard-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 55px 60px;
+  margin-bottom: 60px;
+
+  border-radius: 24px;
+
+  background: var(--beige-light);
+
+  box-shadow: 0 8px 30px rgba(63, 51, 43, 0.08);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--brown);
+}
+
+.dashboard-hero h1 {
+  margin: 0 0 18px;
+
+  font-size: 2.8rem;
+  line-height: 1.15;
+
+  color: var(--brown-dark);
+}
+
+.dashboard-hero h1 span {
+  color: var(--brown);
+}
+
+.hero-text {
+  max-width: 650px;
+
+  margin: 0;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+
+  color: var(--text);
+}
+
+.hero-decoration {
+  flex-shrink: 0;
+
+  font-size: 3.5rem;
+  letter-spacing: 8px;
+
+  transform: rotate(2deg);
+}
+
+
+/* =====================================================
+   SECTIONS
+   ===================================================== */
+
+.dashboard-section,
+.my-pets-section {
+  margin-bottom: 60px;
+}
+
+.section-heading {
+  margin-bottom: 28px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: 2rem;
+
+  color: var(--brown-dark);
+}
+
+
+/* =====================================================
+   QUICK ACTION CARDS
+   ===================================================== */
+
+.dashboard-cards {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: var(--white);
+
+  box-shadow: 0 6px 22px rgba(63, 51, 43, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px);
+
+  border-color: var(--beige);
+
+  box-shadow: 0 14px 32px rgba(63, 51, 43, 0.12);
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 58px;
+  height: 58px;
+
+  margin-bottom: 20px;
+
+  border-radius: 16px;
+
+  background: var(--beige-light);
+
+  font-size: 1.8rem;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+}
+
+.card-content h3 {
+  margin: 0 0 12px;
+
+  font-size: 1.25rem;
+
+  color: var(--brown-dark);
+}
+
+.card-content p {
+  margin: 0 0 24px;
+
+  line-height: 1.65;
+
+  color: var(--text);
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: fit-content;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Brown button - same as auth */
+
+.primary-button {
+  border: none;
+
+  background: var(--brown);
+  color: var(--white);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--brown-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 16px rgba(63, 51, 43, 0.18);
+}
+
+
+/* Secondary button */
+
+.secondary-button {
+  border: 1px solid var(--brown);
+
+  background: transparent;
+
+  color: var(--brown);
+}
+
+.secondary-button:hover {
+  background: var(--beige-light);
+
+  transform: translateY(-2px);
+}
+
+
+/* Disabled button */
+
+.primary-button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* Arrow animation */
+
+.primary-button span,
+.secondary-button span {
+  transition: transform 0.2s ease;
+}
+
+.primary-button:hover:not(:disabled) span,
+.secondary-button:hover span {
+  transform: translateX(3px);
+}
+
+
+/* =====================================================
+   MY PETS
+   ===================================================== */
+
+.my-pets-section {
+  padding: 40px;
+
+  border-radius: 24px;
+
+  background: var(--beige-light);
+}
+
+.pets-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+
+/*
+   PetCard is responsible for styling
+   the actual pet card.
+
+   Dashboard only controls its layout.
+*/
+
+.pets-grid app-pet-card {
+  display: block;
+}
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.loading-message {
+  padding: 30px;
+
+  text-align: center;
+
+  color: var(--text);
+}
+
+
+/* =====================================================
+   EMPTY PETS
+   ===================================================== */
+
+.empty-pets {
+  max-width: 550px;
+
+  margin: 20px auto 0;
+
+  padding: 45px 30px;
+
+  text-align: center;
+
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+
+  background: var(--white);
+}
+
+.empty-pets-icon {
+  margin-bottom: 15px;
+
+  font-size: 2.5rem;
+}
+
+.empty-pets h3 {
+  margin: 0 0 10px;
+
+  font-size: 1.4rem;
+
+  color: var(--brown-dark);
+}
+
+.empty-pets p {
+  max-width: 450px;
+
+  margin: 0 auto 24px;
+
+  line-height: 1.7;
+
+  color: var(--text);
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.error-message {
+  margin-top: 20px;
+
+  padding: 14px 18px;
+
+  border: 1px solid var(--error);
+  border-radius: 8px;
+
+  background: var(--white);
+
+  color: var(--error);
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   MOTIVATIONAL MESSAGE
+   ===================================================== */
+
+.dashboard-message {
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 30px 35px;
+
+  border-radius: 20px;
+
+  background: var(--beige-light);
+}
+
+.message-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  background: var(--white);
+
+  font-size: 1.7rem;
+
+  box-shadow: 0 4px 12px rgba(63, 51, 43, 0.08);
+}
+
+.dashboard-message h2 {
+  margin: 0 0 7px;
+
+  font-size: 1.4rem;
+
+  color: var(--brown-dark);
+}
+
+.dashboard-message p {
+  margin: 0;
+
+  line-height: 1.6;
+
+  color: var(--text);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .dashboard-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pets-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-hero {
+    padding: 45px;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-decoration {
+    font-size: 2.8rem;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .dashboard-page {
+    padding: 25px 16px 50px;
+  }
+
+  .dashboard-hero {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    padding: 35px 25px;
+
+    margin-bottom: 40px;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text {
+    font-size: 0.95rem;
+  }
+
+  .hero-decoration {
+    align-self: center;
+
+    font-size: 2.5rem;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .pets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .my-pets-section {
+    padding: 25px 18px;
+  }
+
+  .dashboard-message {
+    align-items: flex-start;
+
+    padding: 25px 20px;
+  }
+}

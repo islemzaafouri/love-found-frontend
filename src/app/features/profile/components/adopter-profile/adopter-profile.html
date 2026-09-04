@@ -1,0 +1,571 @@
+<div class="adopter-profile-page">
+
+  <!-- ================= HEADER ================= -->
+
+  <section class="profile-header">
+
+    <div class="profile-header-content">
+
+      <p class="eyebrow">
+        Your adoption journey 🐾
+      </p>
+
+      <h1>
+        My profile
+      </h1>
+
+      <p>
+        Tell us a little about yourself so we can help you
+        find a companion who truly belongs in your life.
+      </p>
+
+    </div>
+
+    <div class="profile-decoration">
+      🐶 🐱 🐰
+    </div>
+
+  </section>
+
+
+  <!-- ================= LOADING ================= -->
+
+  @if (isLoading) {
+
+    <div class="loading-message">
+      <span>🐾</span>
+      Loading your profile...
+    </div>
+
+  }
+
+
+  <!-- ================= ERROR ================= -->
+
+  @if (!isLoading && errorMessage) {
+
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  }
+
+
+  <!-- ================= PROFILE ================= -->
+
+  @if (!isLoading && profile) {
+
+    <section class="profile-card">
+
+      <!-- Profile title -->
+
+      <div class="profile-card-header">
+
+        <div>
+
+          <p class="eyebrow">
+            About you
+          </p>
+
+          <h2>
+          Welcome,
+          <span>{{ profile.firstName }}</span>!          
+        </h2>
+
+        </div>
+
+        @if (!isEditing) {
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="startEditing()"
+          >
+            Edit profile ✏️
+          </button>
+
+        }
+
+      </div>
+
+
+      <!-- ================= FORM ================= -->
+
+      <form
+        [formGroup]="adopterForm"
+        (ngSubmit)="saveProfile()"
+      >
+
+
+        <!-- ================= PERSONAL INFORMATION ================= -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              A little about you
+            </h3>
+
+            <p>
+              Help us know who will be welcoming a new friend home.
+            </p>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <!-- First name -->
+
+            <div class="form-group">
+
+              <label for="firstName">
+                First name
+              </label>
+
+              <input
+                id="firstName"
+                type="text"
+                formControlName="firstName"
+                [readonly]="!isEditing"
+                placeholder="Your first name"
+              />
+
+              @if (
+                isEditing &&
+                adopterForm.controls.firstName.touched &&
+                adopterForm.controls.firstName.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  First name is required.
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Last name -->
+
+            <div class="form-group">
+
+              <label for="lastName">
+                Last name
+              </label>
+
+              <input
+                id="lastName"
+                type="text"
+                formControlName="lastName"
+                [readonly]="!isEditing"
+                placeholder="Your last name"
+              />
+
+              @if (
+                isEditing &&
+                adopterForm.controls.lastName.touched &&
+                adopterForm.controls.lastName.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  Last name is required.
+                </small>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+              <label for="phoneNumber">
+                Phone number
+              </label>
+
+              <input
+                id="phoneNumber"
+                type="tel"
+                formControlName="phoneNumber"
+                [readonly]="!isEditing"
+                placeholder="Your phone number"
+              />
+
+              @if (
+                isEditing &&
+                adopterForm.controls.phoneNumber.touched &&
+                adopterForm.controls.phoneNumber.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  Phone number is required.
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- City -->
+
+            <div class="form-group">
+
+              <label for="city">
+                City
+              </label>
+
+              <input
+                id="city"
+                type="text"
+                formControlName="city"
+                [readonly]="!isEditing"
+                placeholder="Your city"
+              />
+
+              @if (
+                isEditing &&
+                adopterForm.controls.city.touched &&
+                adopterForm.controls.city.hasError('required')
+              ) {
+
+                <small class="field-error">
+                  City is required.
+                </small>
+
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= LIFESTYLE ================= -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              Your lifestyle 🏡
+            </h3>
+
+            <p>
+              Every pet has different needs. Tell us about your everyday life.
+            </p>
+
+          </div>
+
+
+          <!-- Lifestyle -->
+
+          <div class="form-group">
+
+            <label for="lifestyleActivity">
+              Activity level
+            </label>
+
+            <select
+              id="lifestyleActivity"
+              formControlName="lifestyleActivity"
+              [disabled]="!isEditing"
+            >
+
+              @for (
+                activity of lifestyleActivities;
+                track activity
+              ) {
+
+                <option [value]="activity">
+                  {{ activity | titlecase }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+
+          <!-- Home -->
+
+          <div class="form-group">
+
+            <label for="homeType">
+              Home type
+            </label>
+
+            <select
+              id="homeType"
+              formControlName="homeType"
+              [disabled]="!isEditing"
+            >
+
+              @for (
+                home of homeTypes;
+                track home
+              ) {
+
+                <option [value]="home">
+                  {{ home | titlecase }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+
+          <!-- Work schedule -->
+
+          <div class="form-group">
+
+            <label for="workSchedule">
+              Work schedule
+            </label>
+
+            <select
+              id="workSchedule"
+              formControlName="workSchedule"
+              [disabled]="!isEditing"
+            >
+
+              @for (
+                schedule of workSchedules;
+                track schedule
+              ) {
+
+                <option [value]="schedule">
+                  {{ schedule | titlecase }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= EXPERIENCE ================= -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              Your experience 🐾
+            </h3>
+
+            <p>
+              Whether this is your first companion or you've
+              shared your life with many animals, we'd love to know.
+            </p>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="experience">
+              Experience with pets
+            </label>
+
+            <select
+              id="experience"
+              formControlName="experience"
+              [disabled]="!isEditing"
+            >
+
+              @for (
+                level of experienceLevels;
+                track level
+              ) {
+
+                <option [value]="level">
+                  {{ level | titlecase }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= PREFERENCES ================= -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <h3>
+              Your future companion ❤️
+            </h3>
+
+            <p>
+              Tell us what kind of little soul you're hoping to welcome.
+            </p>
+
+          </div>
+
+
+          <!-- Preferred species -->
+
+          <div class="form-group">
+
+            <label for="preferredSpecies">
+              Preferred species
+            </label>
+
+            <select
+              id="preferredSpecies"
+              formControlName="preferredSpecies"
+              [disabled]="!isEditing"
+            >
+
+              @for (
+                species of preferredSpecies;
+                track species
+              ) {
+
+                <option [value]="species">
+                  {{ species | titlecase }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+
+          <!-- Other pets -->
+
+          <div class="checkbox-group">
+
+            <label>
+
+              <input
+                type="checkbox"
+                formControlName="hasOtherPets"
+                [disabled]="!isEditing"
+              />
+
+              <span>
+                I already have other pets at home.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <!-- Children -->
+
+          <div class="checkbox-group">
+
+            <label>
+
+              <input
+                type="checkbox"
+                formControlName="hasChildren"
+                [disabled]="!isEditing"
+              />
+
+              <span>
+                There are children living in my home.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <!-- Allergies -->
+
+          <div class="checkbox-group">
+
+            <label>
+
+              <input
+                type="checkbox"
+                formControlName="hasAllergies"
+                [disabled]="!isEditing"
+              />
+
+              <span>
+                I have allergies that may affect my choice of pet.
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= ACTIONS ================= -->
+
+        @if (isEditing) {
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="cancelEditing()"
+              [disabled]="isSaving"
+            >
+              Cancel
+            </button>
+
+
+            <button
+              type="submit"
+              class="primary-button"
+              [disabled]="isSaving"
+            >
+
+              @if (isSaving) {
+                Saving...
+              } @else {
+                Save changes 🐾
+              }
+
+            </button>
+
+          </div>
+
+        }
+
+      </form>
+
+    </section>
+
+  }
+
+
+  <!-- ================= SUCCESS ================= -->
+
+  @if (successMessage) {
+
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+
+  }
+
+</div>
