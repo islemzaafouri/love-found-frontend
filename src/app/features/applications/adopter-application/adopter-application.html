@@ -1,0 +1,101 @@
+<div class="application-container">
+
+  <div class="application-card">
+
+    <h1>Apply to adopt 🐾</h1>
+
+    <p class="subtitle">
+      Tell us why you'd love to give this little heart a home.
+    </p>
+
+    <form
+      [formGroup]="applicationForm"
+      (ngSubmit)="submitApplication()"
+    >
+
+      <div class="form-group">
+
+        <label for="motivation">
+          Why would you like to adopt this pet?
+        </label>
+
+        <textarea
+          id="motivation"
+          formControlName="motivation"
+          rows="7"
+          placeholder="Tell us about your home, your experience with pets, and why you think you would be a good match..."
+        ></textarea>
+
+        @if (
+          applicationForm.get('motivation')?.touched &&
+          applicationForm.get('motivation')?.hasError('required')
+        ) {
+          <small class="error">
+            Please tell us why you would like to adopt this pet.
+          </small>
+        }
+
+        @if (
+          applicationForm.get('motivation')?.touched &&
+          applicationForm.get('motivation')?.hasError('minlength')
+        ) {
+          <small class="error">
+            Your motivation must be at least 20 characters.
+          </small>
+        }
+
+        @if (
+          applicationForm.get('motivation')?.touched &&
+          applicationForm.get('motivation')?.hasError('maxlength')
+        ) {
+          <small class="error">
+            Your motivation cannot exceed 1000 characters.
+          </small>
+        }
+
+      </div>
+
+
+      @if (errorMessage) {
+        <p class="error-message">
+          {{ errorMessage }}
+        </p>
+      }
+
+
+      @if (successMessage) {
+        <p class="success-message">
+          {{ successMessage }}
+        </p>
+      }
+
+
+      <div class="actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="goBack()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="loading"
+        >
+          @if (loading) {
+            Submitting...
+          } @else {
+            Send my application 🐾
+          }
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

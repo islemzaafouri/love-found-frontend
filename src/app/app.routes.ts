@@ -42,6 +42,14 @@ export const routes: Routes = [
         .then(m => m.PROFILE_ROUTES)
     },
 
+    //APPLICATIONS
+    {
+        path: 'applications',
+        loadChildren: () =>
+        import('./features/applications/application.routes')
+        .then(m => m.APPLICATION_ROUTES)
+    },
+
     //unknown URL
     {
         path:'**',

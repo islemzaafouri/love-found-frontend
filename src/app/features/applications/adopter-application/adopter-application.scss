@@ -1,0 +1,154 @@
+.application-container {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.application-card {
+  width: 100%;
+  max-width: 650px;
+  background: var(--white);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(63, 51, 43, 0.12);
+}
+
+h1 {
+  margin: 0 0 10px;
+  color: var(--brown-dark);
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--brown);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  color: var(--brown-dark);
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px;
+  resize: vertical;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: var(--beige-light);
+  color: var(--text);
+
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+
+  &:focus {
+    outline: none;
+    border-color: var(--brown);
+  }
+
+  &::placeholder {
+    color: var(--brown);
+    opacity: 0.7;
+  }
+}
+
+.error {
+  margin-top: 7px;
+  color: var(--error);
+  font-size: 13px;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+
+  background: var(--beige-light);
+  color: var(--error);
+  text-align: center;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+
+  background: var(--beige-light);
+  color: var(--brown);
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.secondary-button,
+.submit-button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.secondary-button {
+  background: var(--beige);
+  color: var(--brown-dark);
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.submit-button {
+  background: var(--brown);
+  color: var(--white);
+
+  &:hover:not(:disabled) {
+    background: var(--brown-dark);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 600px) {
+  .application-container {
+    padding: 25px 15px;
+  }
+
+  .application-card {
+    padding: 25px 20px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}
