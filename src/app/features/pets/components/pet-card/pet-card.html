@@ -14,7 +14,11 @@
 
     <p class="pet-meta">
       {{ pet.gender | titlecase }} · 
-      {{ pet.age }} {{ pet.age === 1 ? 'year' : 'years' }} old
+      @if (pet.age < 12) {
+              {{ pet.age }} {{ pet.age === 1 ? 'month' : 'months' }} old
+            } @else {
+              {{ (pet.age / 12) | number:'1.0-0' }} {{ (pet.age / 12) < 2 ? 'year' : 'years' }} old
+      }
     </p>
 
     <a [routerLink]="['/pets', pet.id]" class="view-details">

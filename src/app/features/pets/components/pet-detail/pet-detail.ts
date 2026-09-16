@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PetService } from '../../services/pet-service';
 import { PetResponse } from '../../models/pet-response';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './pet-detail.html',
   styleUrl: './pet-detail.scss',
 })
-export class PetDetail {
+export class PetDetail implements OnInit {
   @Input() id!:string;
 
   private readonly petService=inject(PetService);
@@ -35,7 +35,6 @@ export class PetDetail {
     }
     const currentUser = this.authService.getCurrentUser();
     console.log('Current user:', currentUser);
-    console.log(' Current user:', currentUser);
     console.log(' Current user role:', currentUser?.role);
     console.log(' Current user profileId:', currentUser?.profileId);
 
@@ -46,11 +45,7 @@ export class PetDetail {
         console.log('Pet:', pet);
         console.log('Pet shelterId:', pet.shelter?.id);
 
-        this.isShelterOwner =currentUser?.role === 'SHELTER'&&
-        currentUser?.profileId === pet.shelter?.id;
-
-        console.log(' Profile ID check:',currentUser?.profileId === pet.shelter?.id);
-
+        
         this.isShelterOwner =
           currentUser?.role === 'SHELTER' &&
           currentUser?.profileId === pet.shelter?.id;
@@ -72,13 +67,34 @@ export class PetDetail {
    this.petService.deactivatePet(id).subscribe({
     next: () => {
       console.log('Pet deactivated successfully!');
-    
+      if (this.pet) {
+        this.pet.status = 'ADOPTED'; 
+      }
+      this.cdr.detectChanges();    
     },
     error: (err) => {
       console.error('Failed to deactivate pet:', err);
       this.errorMessage = err?.error?.message || 'Failed to deactivate pet.';
+      this.cdr.detectChanges();
     }
   });
+  }
+  activatePet(id: number): void { 
+    console.log(' ACTIVATE request → /pets/' + id + '/activate');
+    this.petService.activatePet(id).subscribe({
+      next: () => {
+        console.log('Pet activated successfully!');
+        if (this.pet) {
+        this.pet.status = 'AVAILABLE'; 
+      }
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Failed to activate pet:', err);
+        this.errorMessage = err?.error?.message || 'Failed to activate pet.';
+        this.cdr.detectChanges();
+      }
+    });
   }
 
 }

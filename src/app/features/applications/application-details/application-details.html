@@ -1,0 +1,193 @@
+<div class="application-detail-page">
+
+  <a [routerLink]="isShelterOwner ? '/applications/shelter' : '/applications/my'" class="back-link">
+  ← Back to applications
+</a>
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="state-message">
+      <div class="state-icon">📄</div>
+      <h2>Retrieving application details...</h2>
+      <p>We're bringing their adoption journey to you.</p>
+    </div>
+  }
+
+  <!-- Page-Level Error State (Initial Fetch Failure) -->
+  @if (!isLoading && errorMessage && !applicationDetails) {
+    <div class="state-message error">
+      <div class="state-icon">🤍</div>
+      <h2>We couldn't find this application</h2>
+      <p>{{ errorMessage }}</p>
+      <button type="button" (click)="goBack()" class="back-button">
+        Back to applications
+      </button>
+    </div>
+  }
+
+  <!-- Main Application Card -->
+  @if (!isLoading && applicationDetails) {
+
+    <article class="application-detail-card">
+
+      <!-- Hero Section: Pet Image & Application Intro -->
+      <section class="application-intro">
+
+        <div class="pet-image-wrapper">
+          <img
+            [src]="applicationDetails.pet.photoUrl || 'assets/placeholder-pet.png'"
+            [alt]="applicationDetails.pet.name"
+            class="pet-photo"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="application-intro-info">
+
+          <div class="status-header">
+            <p class="eyebrow">Adoption Journey</p>
+            <span class="status-badge" [attr.data-status]="applicationDetails.status">
+              {{ applicationDetails.status }}
+            </span>
+          </div>
+
+          <h1>Application for {{ applicationDetails.pet.name }} 🐾</h1>
+
+          <p class="pet-meta">
+            {{ applicationDetails.pet.gender | titlecase }}
+            ·
+            {{ applicationDetails.pet.age }} {{ applicationDetails.pet.age === 1 ? 'year' : 'years' }} old
+          </p>
+
+          <p class="breed">
+            {{ applicationDetails.pet.breed }}
+          </p>
+
+          <p class="submitted-date">
+            Submitted on {{ applicationDetails.createdAt | date:'longDate' }}
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- Adopter Info Section -->
+      <section class="application-section applicant-info">
+
+        <p class="eyebrow">The hopeful adopter</p>
+
+        <h2>Applicant Profile</h2>
+
+        <div class="applicant-details">
+          <p>
+            <strong>Name:</strong> 
+            {{ applicationDetails.adopter.firstName }} {{ applicationDetails.adopter.lastName }}
+          </p>
+        </div>
+
+      </section>
+
+      <!-- Motivation Section -->
+      <section class="application-section motivation-story">
+
+        <p class="eyebrow">Why they want to open their home</p>
+
+        <h2>Adoption Motivation</h2>
+
+        <p class="motivation-text">
+          "{{ applicationDetails.motivation }}"
+        </p>
+
+      </section>
+
+      <!-- SECTION A: Adopter Actions (Edit / Cancel Application) -->
+      @if (!isShelterOwner && applicationDetails.status === 'PENDING') {
+        <section class="action-section adopter-actions">
+
+          <p class="eyebrow">Need to refine your application?</p>
+          <h2>Update your adoption request 🤎</h2>
+
+          <form [formGroup]="updateApplicationForm" (ngSubmit)="updateMyApplication()" class="edit-motivation-form">
+
+            <div class="form-group">
+              <textarea 
+                formControlName="motivation" 
+                rows="4" 
+                placeholder="Explain why you want to give this pet a loving home...">
+              </textarea>
+
+              @if (updateApplicationForm.get('motivation')?.touched && updateApplicationForm.get('motivation')?.invalid) {
+                <small class="field-error">Motivation must be between 20 and 1000 characters.</small>
+              }
+            </div>
+
+            <!-- Targeted Adopter Feedback Messages -->
+            @if (successMessage) {
+              <div class="inline-message success">
+                <span>✓</span> {{ successMessage }}
+              </div>
+            }
+
+            @if (errorMessage) {
+              <div class="inline-message error">
+                <span>⚠️</span> {{ errorMessage }}
+              </div>
+            }
+
+            <div class="button-group">
+              <button type="submit" [disabled]="updateApplicationForm.invalid || isSubmitting" class="update-button">
+                Update Motivation
+              </button>
+              <button type="button" (click)="cancelMyApplication()" [disabled]="isSubmitting" class="cancel-button">
+                Cancel Application
+              </button>
+            </div>
+
+          </form>
+
+        </section>
+      }
+
+      <!-- SECTION B: Shelter Owner Actions (Update Status) -->
+      @if (isShelterOwner) {
+        <section class="action-section shelter-actions">
+
+          <p class="eyebrow">Shelter Management</p>
+          <h2>Review and change application status 🐾</h2>
+
+          <form [formGroup]="updateStatus" (ngSubmit)="updateApplicationStatus()" class="status-form">
+
+            <div class="form-group">
+              <select formControlName="status" class="status-select">
+                <option value="ACCEPTED">ACCEPTED</option>
+                <option value="REJECTED">REJECTED</option>
+              </select>
+            </div>
+
+            <!-- Targeted Shelter Feedback Messages -->
+            @if (successMessage) {
+              <div class="inline-message success">
+                <span>✓</span> {{ successMessage }}
+              </div>
+            }
+
+            @if (errorMessage) {
+              <div class="inline-message error">
+                <span>⚠️</span> {{ errorMessage }}
+              </div>
+            }
+
+            <button type="submit" [disabled]="updateStatus.invalid || isSubmitting" class="save-status-button">
+              Save Status Change
+            </button>
+
+          </form>
+
+        </section>
+      }
+
+    </article>
+
+  }
+
+</div>

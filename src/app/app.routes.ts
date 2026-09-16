@@ -50,6 +50,13 @@ export const routes: Routes = [
         .then(m => m.APPLICATION_ROUTES)
     },
 
+    {
+        path: 'my-pets',
+        loadComponent: () =>
+        import('./features/shelter-pets-component/shelter-pets-component')
+        .then(m => m.ShelterPets),
+    }
+,
     //unknown URL
     {
         path:'**',

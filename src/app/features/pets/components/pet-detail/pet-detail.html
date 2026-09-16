@@ -77,9 +77,11 @@
           <p class="pet-meta">
             {{ pet.gender | titlecase }}
             ·
-            {{ pet.age }}
-            {{ pet.age === 1 ? 'year' : 'years' }}
-            old
+            @if (pet.age < 12) {
+              {{ pet.age }} {{ pet.age === 1 ? 'month' : 'months' }} old
+            } @else {
+              {{ (pet.age / 12) | number:'1.0-0' }} {{ (pet.age / 12) < 2 ? 'year' : 'years' }} old
+            }
           </p>
 
           <p class="breed">
@@ -149,7 +151,7 @@
 
       }
 
-
+      @if(!isShelterOwner){
       <!-- Adoption CTA -->
       <section class="adoption-section">
 
@@ -166,11 +168,13 @@
           them the love, safety and happiness they deserve.
         </p>
 
-        <button class="adopt-button">
+        <button class="adopt-button"
+        [routerLink]="['/applications', pet.id]">
           I want to meet {{ pet.name }}
         </button>
 
       </section>
+    }
 
       @if (isShelterOwner) {
       <div class="pet-actions">
@@ -180,11 +184,15 @@
           Edit pet
         </button>
 
-        <button
-          class="deactivate-button"
-          (click)="deactivatePet(pet.id)">
-          Deactivate pet
-        </button>
+        @if (pet.status==='AVAILABLE') {
+          <button type="button" class="update-button" (click)="deactivatePet(pet.id)">
+            Deactivate pet
+          </button>
+        } @else {
+          <button type="button" class="update-button activate" (click)="activatePet(pet.id)">
+            Activate pet
+          </button>
+        }
       </div>
     }
 

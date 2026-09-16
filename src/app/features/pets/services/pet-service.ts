@@ -40,5 +40,8 @@ export class PetService {
   deactivatePet(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+  activatePet(id: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/activate/${id}`, {});
+  }
 }
 

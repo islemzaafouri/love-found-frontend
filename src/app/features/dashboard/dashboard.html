@@ -4,22 +4,13 @@
   <section class="dashboard-hero">
 
     <div class="hero-content">
-
-      <p class="eyebrow">
-        Welcome back 🐾
-      </p>
-
-      <h1>
-        Welcome,
-        <span>{{ shelter?.shelterName }}</span>!
-      </h1>
-
+      <p class="eyebrow">Welcome back 🐾</p>
+      <h1>Welcome, {{ shelter?.shelterName }}!</h1>
       <p class="hero-text">
         Every day, you give little hearts a second chance.
         Keep caring, keep helping, and together we'll find
         each of them the loving home they deserve.
       </p>
-
     </div>
 
     <div class="hero-decoration">
@@ -33,271 +24,87 @@
   <section class="dashboard-section">
 
     <div class="section-heading">
-
-      <p class="eyebrow">
-        Your shelter
-      </p>
-
-      <h2>
-        What would you like to do?
-      </h2>
-
+      <p class="eyebrow">Your shelter</p>
+      <h2>What would you like to do?</h2>
     </div>
-
 
     <div class="dashboard-cards">
 
-
-      <!-- ================= MY PETS ================= -->
+      <!-- MY PETS -->
       <div class="dashboard-card">
-
-        <div class="card-icon">
-          🐾
-        </div>
-
+        <div class="card-icon">🐾</div>
         <div class="card-content">
-
-          <h3>
-            My pets
-          </h3>
-
+          <h3>My pets</h3>
           <p>
             Manage the little souls currently under
             your care and help them find their forever families.
           </p>
-
           <button
             type="button"
-            class="primary-button"
-            (click)="loadMyPets()"
-            [disabled]="isLoadingPets"
+            class="secondary-button"
+            (click)="goToMyPets()"
           >
-
-            @if (isLoadingPets) {
-              Loading...
-            } @else {
-              See my pets
-              <span>→</span>
-            }
-
+            See my pets <span>→</span>
           </button>
-
         </div>
-
       </div>
 
-
-      <!-- ================= ADD PET ================= -->
+      <!-- ADD PET -->
       <div class="dashboard-card">
-
-        <div class="card-icon">
-          💕
-        </div>
-
+        <div class="card-icon">💕</div>
         <div class="card-content">
-
-          <h3>
-            Add a new friend
-          </h3>
-
+          <h3>Add a new friend</h3>
           <p>
             A new pet has arrived? Give them a profile
             and start their journey toward a loving home.
           </p>
-
           <button
             type="button"
             class="secondary-button"
             (click)="goToCreatePet()"
           >
-            Add a pet
-            <span>+</span>
+            Add a pet <span>+</span>
           </button>
-
         </div>
-
       </div>
-    
-      <!-- ================= APPLICATIONS ================= -->
+
+      <!-- APPLICATIONS -->
       <div class="dashboard-card">
-
-        <div class="card-icon">
-          💌
-        </div>
-
+        <div class="card-icon">💌</div>
         <div class="card-content">
-
-          <h3>
-            Adoption applications
-          </h3>
-
+          <h3>Adoption applications</h3>
           <p>
             See the people who opened their hearts
             and want to give one of your pets a home.
           </p>
-
           <button
             type="button"
             class="secondary-button"
+            (click)="goToApplications()"
           >
-            View applications
-            <span>→</span>
+            View applications <span>→</span>
           </button>
-
         </div>
+      </div>
 
-      </div> 
-
-      <!-- ================= PROFILE SECTION ================= -->
-    <div class="dashboard-card">
-
-      <div class="profile-card">
-        <div class="card-icon">
-          👤
-        </div>
+      <!-- PROFILE -->
+      <div class="dashboard-card">
+        <div class="card-icon">👤</div>
         <div class="card-content">
           <h3>Your profile</h3>
-          <p> Manage your shelter information and settings.</p>
+          <p>Manage your shelter information and settings.</p>
           <button
             type="button"
-            (click)="goToProfile()"
             class="secondary-button"
+            (click)="goToProfile()"
           >
-            View profile
-            <span>→</span>
+            View profile <span>→</span>
           </button>
-
         </div>
-
-      </div>
-    </div>
-    </div>
-
-  </section>
-
-
-
-  <!-- ================= MY PETS ================= -->
-  @if (showPets) {
-
-    <section class="my-pets-section">
-
-      <div class="section-heading">
-
-        <p class="eyebrow">
-          The little hearts in your care 🐾
-        </p>
-
-        <h2>
-          Your pets
-        </h2>
-
       </div>
 
+    </div> <!-- Closes dashboard-cards -->
 
-      <!-- Loading -->
-      @if (isLoadingPets) {
+  </section> <!-- Closes dashboard-section -->
 
-        <p class="loading-message">
-          Looking for your pets...
-        </p>
-
-      }
-
-
-      <!-- Error -->
-      @if (petsErrorMessage) {
-
-        <div class="error-message">
-          {{ petsErrorMessage }}
-        </div>
-
-      }
-
-
-      <!-- No pets -->
-      @if (!isLoadingPets && !petsErrorMessage && pets.length === 0) {
-
-        <div class="empty-pets">
-
-          <div class="empty-pets-icon">
-            🐾
-          </div>
-
-          <h3>
-            No pets yet
-          </h3>
-
-          <p>
-            Your shelter doesn't have any pets listed yet.
-            Maybe it's time to give a new little friend
-            a story?
-          </p>
-
-          <button
-            type="button"
-            class="primary-button"
-            (click)="goToCreatePet()"
-          >
-            Add a pet
-            <span>+</span>
-          </button>
-
-        </div>
-
-      }
-
-
-      <!-- Pets -->
-      @if (!isLoadingPets && !petsErrorMessage && pets.length > 0) {
-
-        <div class="pets-grid">
-
-          @for (pet of pets; track pet.id) {
-
-            <app-pet-card [pet]="pet" />
-
-          }
-
-        </div>
-
-      }
-
-    </section>
-
-  }
-
-
-  <!-- ================= MOTIVATIONAL SECTION ================= -->
-  <section class="dashboard-message">
-
-    <div class="message-icon">
-      ❤️
-    </div>
-
-    <div>
-
-      <h2>
-        Every pet has a story.
-      </h2>
-
-      <p>
-        And you're helping write the part where
-        their story finally gets a happy ending.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= PROFILE ERROR ================= -->
-  @if (profileErrorMessage) {
-
-    <div class="error-message">
-      {{ profileErrorMessage }}
-    </div>
-
-  }
-
-</div>
+</div> <!-- Closes dashboard-page -->

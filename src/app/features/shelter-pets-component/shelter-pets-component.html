@@ -1,0 +1,138 @@
+<div class="shelter-pets-page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+
+    <div class="header-content">
+      <p class="eyebrow">Your little souls 🐾</p>
+
+      <h1>My pets</h1>
+
+      <p class="page-subtitle">
+        Keep track of all the beautiful souls waiting
+        for their forever homes.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="goToCreatePet()"
+    >
+      Add a pet
+      <span>+</span>
+    </button>
+
+  </header>
+
+
+  <!-- LOADING -->
+  @if (isLoadingPets) {
+
+    <div class="state-message">
+      <div class="state-icon">🐾</div>
+
+      <h2>Finding your little souls...</h2>
+
+      <p>
+        We're loading the pets under your care.
+      </p>
+    </div>
+
+  }
+
+
+  <!-- ERROR -->
+  @else if (petsErrorMessage) {
+
+    <div class="state-message error-state">
+
+      <div class="state-icon">💔</div>
+
+      <h2>Something went wrong</h2>
+
+      <p>
+        {{ petsErrorMessage }}
+      </p>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="loadMyPets()"
+      >
+        Try again
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- EMPTY -->
+  @else if (pets.length === 0) {
+
+    <div class="state-message">
+
+      <div class="state-icon">🐶</div>
+
+      <h2>No pets yet</h2>
+
+      <p>
+        You haven't added any pets to your shelter yet.
+        Let's give the first little soul a chance to find
+        their forever home.
+      </p>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="goToCreatePet()"
+      >
+        Add your first pet
+        <span>🐾</span>
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- PETS -->
+  @else {
+
+    <section class="pets-section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Your pets</h2>
+
+          <p>
+            {{ pets.length }}
+            {{ pets.length === 1 ? 'little soul' : 'little souls' }}
+            currently in your care.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- PET CARDS -->
+      <div class="pets-grid">
+
+        @for (pet of pets; track pet.id) {
+
+          <app-pet-card
+            [pet]="pet"
+            (click)="goToPetDetails(pet.id)"
+          ></app-pet-card>
+
+        }
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

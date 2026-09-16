@@ -14,11 +14,14 @@ export class ApplicationService {
     getMyApplications():Observable<ApplicationResponse[]>{
         return this.http.get<ApplicationResponse[]>(`${this.baseUrl}/my-applications`);
     }
+    getApplicationById(applicationId:number):Observable<ApplicationResponse>{
+        return this.http.get<ApplicationResponse>(`${this.baseUrl}/${applicationId}`);
+    }
     updateMyApplication(applicationId:number,request:ApplicationUpdateRequest):Observable<ApplicationResponse>{
         return this.http.put<ApplicationResponse>(`${this.baseUrl}/${applicationId}`,request);
     }
     cancelMyApplication(applicationId:number):Observable<void>{
-        return this.http.delete<void>(`${this.baseUrl}/${applicationId}`);
+        return this.http.put<void>(`${this.baseUrl}/${applicationId}/cancel`,{});
     }
     //SHELTER
     getApplicationsForMyShelter():Observable<ApplicationResponse[]>{
@@ -28,5 +31,5 @@ export class ApplicationService {
         return this.http.put<ApplicationResponse>(`${this.baseUrl}/${applicationId}/status`,request);
     }
 
-
+    
 }

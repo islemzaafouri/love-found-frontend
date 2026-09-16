@@ -6,10 +6,11 @@ import { ExperienceLevel, HomeType, LifeStyleActivity, PreferredSpecies, WorkSch
 import { AdopterProfileRequest } from '../../models/adopte-profile-request';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-adopter-profile',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './adopter-profile.html',
   styleUrl: './adopter-profile.scss',
 })

@@ -1,0 +1,155 @@
+<div class="my-applications-page">
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="eyebrow">
+      {{ isShelterView ? 'Shelter Management' : 'Your adoption journey' }}
+    </p>
+
+    <h1>
+      {{ isShelterView ? 'Shelter Applications 🐾' : 'My applications 🐾' }}
+    </h1>
+
+    <p class="page-subtitle">
+      @if (isShelterView) {
+        Review and manage incoming adoption requests for the animals in your care.
+      } @else {
+        Here you can follow the little hearts you've applied to adopt and see how your applications are progressing.
+      }
+    </p>
+  </header>
+
+  <!-- LOADING -->
+  @if (loading) {
+    <div class="state-message">
+      <div class="state-icon">🐾</div>
+      <h2>Loading applications...</h2>
+      <p>Gathering adoption records for you.</p>
+    </div>
+  }
+
+  <!-- ERROR -->
+  @if (!loading && errorMessage) {
+    <div class="state-message error">
+      <div class="state-icon">🤍</div>
+      <h2>Something went wrong</h2>
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="back-button" (click)="fetchApplications()">
+        Try again
+      </button>
+    </div>
+  }
+
+  <!-- EMPTY STATE -->
+  @if (!loading && !errorMessage && applications.length === 0) {
+    <div class="state-message">
+      <div class="empty-icon">💌</div>
+      <h2>No applications yet</h2>
+
+      <p>
+        @if (isShelterView) {
+          There are currently no adoption requests submitted for your shelter pets.
+        } @else {
+          You haven't applied to adopt a pet yet. Maybe your little soulmate is still waiting for you. 🐾
+        }
+      </p>
+
+      @if (!isShelterView) {
+        <button type="button" class="primary-button" routerLink="/pets">
+          Discover pets
+        </button>
+      }
+    </div>
+  }
+
+  <!-- APPLICATIONS SECTION -->
+  @if (!loading && !errorMessage && applications.length > 0) {
+    <section class="applications-section">
+
+      <div class="section-heading">
+        <div>
+          <h2>
+            {{ isShelterView ? 'Incoming Requests' : 'Your applications' }}
+          </h2>
+
+          <p class="count-tag">
+            {{ applications.length }}
+            {{ applications.length === 1 ? 'application' : 'applications' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- APPLICATION CARDS GRID -->
+      <div class="applications-grid">
+        @for (application of applications; track application.id) {
+          <article
+            class="application-card"
+            (click)="viewApplication(application.id)"
+          >
+
+            <!-- PET IMAGE & BADGE -->
+            <div class="pet-image-container">
+              @if (application.pet.photoUrl) {
+                <img
+                  [src]="application.pet.photoUrl"
+                  [alt]="application.pet.name"
+                  class="pet-image"
+                  loading="lazy"
+                />
+              } @else {
+                <div class="pet-placeholder">
+                  🐾
+                </div>
+              }
+
+              <!-- STATUS BADGE -->
+              <span
+                class="status-badge"
+                [attr.data-status]="application.status"
+              >
+                {{ application.status }}
+              </span>
+            </div>
+
+            <!-- CARD CONTENT -->
+            <div class="application-content">
+
+              <!-- Label: Shows Applicant Name (Shelter View) OR standard label (Adopter View) -->
+              <p class="card-label">
+                @if (isShelterView) {
+                  Applicant: <strong>{{ application.adopter.firstName }} {{ application.adopter.lastName }}</strong>
+                } @else {
+                  Application for
+                }
+              </p>
+
+              <h3>{{ application.pet.name }}</h3>
+
+              <p class="pet-meta">
+                {{ application.pet.species | titlecase }}
+                ·
+                {{ application.pet.breed }}
+              </p>
+
+              <!-- MOTIVATION PREVIEW -->
+              <p class="motivation-preview">
+                "{{ application.motivation }}"
+              </p>
+
+              <!-- CARD FOOTER -->
+              <div class="application-footer">
+                <span>
+                  Applied {{ application.createdAt | date:'mediumDate' }}
+                </span>
+              </div>
+
+            </div>
+
+          </article>
+        }
+      </div>
+
+    </section>
+  }
+
+</div>
