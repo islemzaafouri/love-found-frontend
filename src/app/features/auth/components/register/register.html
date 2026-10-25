@@ -454,11 +454,15 @@
 
   }
 
+  @if (successMessage) {
+    <div class="alert alert-success">
+      {{ successMessage }}
+    </div>
+  }
 
-  <!-- ========================= -->
+
+  
   <!-- SERVER ERROR -->
-  <!-- ========================= -->
-
   @if (errorMessage) {
 
     <p class="error server-error">

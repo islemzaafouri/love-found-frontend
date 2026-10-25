@@ -52,6 +52,7 @@ export class ApplicationDetails implements OnInit {
     this.applicationService.getApplicationById(numericId).subscribe({
       next: (application) => {
         this.applicationDetails = application;
+        console.log(this.applicationDetails);
 
         this.isShelterOwner =
           currentUser?.role === 'SHELTER' &&

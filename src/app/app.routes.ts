@@ -6,7 +6,9 @@ export const routes: Routes = [
     //default page 
     {
         path: '',
-        redirectTo:'auth',
+        loadComponent: () =>
+        import('./features/home/home')
+        .then(m => m.Home),
         pathMatch:'full'
     },
 
@@ -60,7 +62,8 @@ export const routes: Routes = [
     //unknown URL
     {
         path:'**',
-        redirectTo:'pets'
+        redirectTo:'home',
+        pathMatch:'full'
     }
 
 

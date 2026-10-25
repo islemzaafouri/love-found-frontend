@@ -1,0 +1,148 @@
+<nav class="navbar">
+
+  <div class="navbar-container">
+
+    <!-- LOGO -->
+    <a
+      routerLink="/"
+      class="navbar-logo"
+      (click)="closeMenu()"
+    >
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">LoveFound</span>
+    </a>
+
+
+    <!-- HAMBURGER BUTTON -->
+    <button
+      type="button"
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+
+    <!-- NAVIGATION LINKS -->
+    <div
+      class="navbar-links"
+      [class.menu-open]="isMenuOpen"
+    >
+
+      <!-- PUBLIC LINKS -->
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeMenu()"
+      >
+        Home
+      </a>
+
+      @if (!isShelter) {
+      <a
+        routerLink="/pets"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        Find a friend
+      </a>
+}
+
+
+      <!-- ADOPTER LINKS -->
+      @if (isAdopter) {
+        <a
+          routerLink="/applications/my"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          My applications
+        </a>
+
+        <a
+          routerLink="/profile/adopter"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          My profile
+        </a>
+      }
+
+
+      <!-- SHELTER LINKS -->
+      @if (isShelter) {
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          Dashboard
+        </a>
+
+        <a
+          routerLink="/my-pets"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          My pets
+        </a>
+
+        <a
+          routerLink="/applications/shelter"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          Applications
+        </a>
+      }
+
+
+      <!-- ADMIN LINKS -->
+      @if (isAdmin) {
+        <a
+          routerLink="/admin"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+        >
+          Admin dashboard
+        </a>
+      }
+
+
+      <!-- AUTHENTICATION ACTIONS -->
+      <div class="navbar-actions">
+
+        @if (!isLoggedIn) {
+          <a
+            routerLink="/auth"
+            class="auth-link"
+            (click)="closeMenu()"
+          >
+            Login / Sign Up
+          </a>
+
+        }
+
+
+        @if (isLoggedIn) {
+          <button
+            type="button"
+            class="logout-button"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>

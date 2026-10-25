@@ -19,6 +19,7 @@ export class LoginComponent {
   goToRegister(): void {
   this.registerClicked.emit();
   }
+
   
   private cdr = inject(ChangeDetectorRef);
   private fb=inject(FormBuilder); 
@@ -33,6 +34,13 @@ export class LoginComponent {
   });
 
   errorMessage='';
+
+    ngOnInit(): void {
+    this.loginForm = this.fb.nonNullable.group({
+    email: [''],
+    password: ['']
+  });
+}
 
   onSubmit(){
 

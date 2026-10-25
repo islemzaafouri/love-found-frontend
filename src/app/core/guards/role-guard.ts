@@ -6,7 +6,6 @@ export const roleGuard: CanActivateFn = (route) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Cast as string[] to get proper array methods
   const requiredRoles = route.data['role'] as string[];
   const user = authService.currentUser();
 
@@ -21,5 +20,4 @@ export const roleGuard: CanActivateFn = (route) => {
   }
 
   // Redirect to /pets if unauthorized
-  return router.createUrlTree(['/pets']);
-};
+  return router.createUrlTree(['/pets']);};

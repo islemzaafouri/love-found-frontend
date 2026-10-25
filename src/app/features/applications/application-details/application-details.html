@@ -56,8 +56,11 @@
           <p class="pet-meta">
             {{ applicationDetails.pet.gender | titlecase }}
             ·
-            {{ applicationDetails.pet.age }} {{ applicationDetails.pet.age === 1 ? 'year' : 'years' }} old
-          </p>
+            @if (applicationDetails.pet.age < 12) {
+              {{ applicationDetails.pet.age }} {{ applicationDetails.pet.age === 1 ? 'month' : 'months' }} old
+            } @else {
+              {{ (applicationDetails.pet.age / 12) | number:'1.0-0' }} {{ (applicationDetails.pet.age / 12) < 2 ? 'year' : 'years' }} old
+            }          </p>
 
           <p class="breed">
             {{ applicationDetails.pet.breed }}

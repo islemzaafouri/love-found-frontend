@@ -26,7 +26,14 @@ export class Register {
   selectedRole: 'ADOPTER' | 'SHELTER' = 'ADOPTER';
 
   errorMessage = '';
+  successMessage='';
   private cdr = inject(ChangeDetectorRef);
+
+  ngOnInit(): void {
+  // Clear old session (Cute Paws Shelter) as soon as registration page loads
+  localStorage.clear(); 
+  this.authService.currentUser.set(null);
+}
 
 
   // =========================
@@ -183,9 +190,9 @@ export class Register {
 
           console.log('Adopter registration successful', response);
 
-          this.router.navigate(['/pets']);
+          this.successMessage = 'Registered successfully! You can now log in.';
 
-        },
+          this.cdr.detectChanges();        },
 
         error: (error) => {
 
@@ -222,8 +229,7 @@ export class Register {
       next: (response) => {
 
         console.log('Shelter registration successful', response);
-
-        this.router.navigate(['/dashboard']);
+        this.successMessage = 'Registered successfully! You can now log in.';
 
       },
 
