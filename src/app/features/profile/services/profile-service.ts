@@ -5,11 +5,12 @@ import { ShelterProfileResponse } from '../models/shelter-profile-response';
 import { AdopterProfileResponse } from '../models/adopter-profile-response';
 import { ShelterProfileRequest } from '../models/shelter-profile-request';
 import { AdopterProfileRequest } from '../models/adopte-profile-request';
+import { environment } from '../../../../environments/environment';
 
 @Service()
 export class ProfileService {
     private readonly http=inject(HttpClient);
-    private readonly API_URL = 'http://localhost:8080/api/profile';
+    private readonly API_URL = `${environment.apiBaseUrl}/profile`;
 
     //SHELTER
     getMyShelterProfile():Observable<ShelterProfileResponse>{
