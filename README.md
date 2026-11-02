@@ -25,6 +25,10 @@ The frontend is built with Angular's standalone-component architecture and a fea
 
 For the cross-repository component diagram and request flows, see the [LoveFound system architecture](https://github.com/islemzaafouri/love-found-api/blob/main/docs/architecture.md).
 
+
+
+For the entity-relationship diagram and database overview, see the [LoveFound database design documentation](https://github.com/islemzaafouri/love-found-api/blob/main/docs/database-design.md).
+
 ## Features
 
 ### Public experience
