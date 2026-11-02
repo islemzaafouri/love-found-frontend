@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { PetResponse } from '../models/pet-response';
 import { PetRequest } from '../models/pet-request';
 import { PetSpecies } from '../models/pet-enums';
+import { environment } from '../../../../environments/environment';
 
 @Service()
 export class PetService {
     private http=inject(HttpClient);
-    private baseUrl='http://localhost:8080/api/pets';
+    private readonly baseUrl = `${environment.apiBaseUrl}/pets`;
 
     getAvailablePets():Observable<PetResponse[]>{
         return this.http.get<PetResponse[]>(this.baseUrl)
