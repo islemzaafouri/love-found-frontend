@@ -8,6 +8,7 @@ import { RegisterAdopterRequest } from '../../features/auth/models/register-adop
 import {UserModel} from "../../core/models/user.model";
 import { TokenService } from './TokenService';
 import { RegisterShelterRequest } from '../../features/auth/models/register-shelter-request.model';
+import { environment } from '../../../environments/environment';
 
 
 @Service()
@@ -15,7 +16,7 @@ export class AuthService {
     private http = inject(HttpClient);
     private tokenService = inject(TokenService);
 
-    private API_URL = 'http://localhost:8080/api/auth';
+    private readonly API_URL = `${environment.apiBaseUrl}/auth`;
 
     currentUser=signal<UserModel | null>(this.loadUserFromStorage());
     getCurrentUser(): UserModel | null {
