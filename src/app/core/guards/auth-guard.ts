@@ -1,6 +1,6 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/AuthService';
-import { inject } from '@angular/core/primitives/di';
+import { inject } from '@angular/core';
 
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
@@ -10,5 +10,5 @@ export const authGuard: CanActivateFn = () => {
     return true;
   }
   // Redirect to the login page if the user is not authenticated
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/auth']);
 };
