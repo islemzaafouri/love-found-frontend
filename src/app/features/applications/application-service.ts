@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { ApplicationRequest, ApplicationResponse, ApplicationStatusUpdateRequest, ApplicationUpdateRequest } from './application-model';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Service()
 export class ApplicationService {
     private http=inject(HttpClient);
-    private baseUrl='http://localhost:8080/api/applications';
+    private readonly baseUrl = `${environment.apiBaseUrl}/applications`;
     //ADOPTER
     createApplication(request:ApplicationRequest):Observable<ApplicationResponse>{
         return this.http.post<ApplicationResponse>(this.baseUrl,request);
