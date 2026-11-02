@@ -29,6 +29,10 @@ For the cross-repository component diagram and request flows, see the [LoveFound
 
 For the entity-relationship diagram and database overview, see the [LoveFound database design documentation](https://github.com/islemzaafouri/love-found-api/blob/main/docs/database-design.md).
 
+
+
+For a guided map of the frontend features, backend domains, and how they communicate, see the [LoveFound application structure documentation](https://github.com/islemzaafouri/love-found-api/blob/main/docs/application-structure.md).
+
 ## Features
 
 ### Public experience
