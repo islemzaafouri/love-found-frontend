@@ -130,7 +130,7 @@ npm start
 
 Open [http://localhost:4200](http://localhost:4200).
 
-The current authentication service points to the local API at `http://localhost:8080/api/auth`. Other services should use the matching local API base URL. Make sure the backend is configured and running before testing API-dependent features.
+The API base URL is centralized in `src/environments/environment.ts` and `environment.development.ts`. The development build uses `http://localhost:8080/api`; the production configuration uses the relative `/api` path, intended for deployment behind a same-origin reverse proxy. Make sure the backend is configured and running before testing API-dependent features.
 
 ## Build and test
 
