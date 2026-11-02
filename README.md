@@ -21,6 +21,10 @@ The frontend is built with Angular's standalone-component architecture and a fea
 - Font Awesome
 - Vitest (configured test runner)
 
+
+
+For the cross-repository component diagram and request flows, see the [LoveFound system architecture](https://github.com/islemzaafouri/love-found-api/blob/main/docs/architecture.md).
+
 ## Features
 
 ### Public experience
