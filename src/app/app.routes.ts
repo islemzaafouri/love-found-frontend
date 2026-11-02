@@ -54,6 +54,8 @@ export const routes: Routes = [
 
     {
         path: 'my-pets',
+        canActivate: [authGuard, roleGuard],
+        data: { role: ['SHELTER'] },
         loadComponent: () =>
         import('./features/shelter-pets-component/shelter-pets-component')
         .then(m => m.ShelterPets),
