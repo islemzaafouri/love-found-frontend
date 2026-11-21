@@ -1,68 +1,47 @@
-# LoveFound Frontend
+# LoveFound — Frontend
 
-> The Angular web application for **LoveFound**, a pet adoption platform designed to help adopters discover pets and connect with shelters.
+> A warm, role-based pet adoption platform that helps people discover animals in need of a home and gives shelters a place to manage their adoption process.
 
-**Backend API:** [love-found-api](https://github.com/islemzaafouri/love-found-api)
+[![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)](https://angular.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SCSS](https://img.shields.io/badge/Styles-SCSS-CC6699?logo=sass&logoColor=white)](https://sass-lang.com/)
 
-## Overview
+**Related project:** [LoveFound API — Spring Boot backend](https://github.com/islemzaafouri/love-found-api)
 
-LoveFound brings adopters and shelters together through a role-based pet adoption workflow.
+---
 
-The frontend is built with Angular's standalone-component architecture and a feature-based folder structure. It communicates with the Spring Boot REST API and uses an HTTP interceptor to attach authentication information to requests.
+## About the project
+
+LoveFound is a pet adoption web application built around a simple idea: every animal deserves a safe, loving home. It connects adopters with shelters through a shared platform, making it easier to discover pets, submit adoption applications, and follow their progress.
+
+The frontend is developed with Angular using standalone components, lazy-loaded feature routes, and a feature-oriented structure. It communicates with the Spring Boot REST API and uses an HTTP interceptor to attach authentication information to protected requests.
+
+## User experiences
+
+| Adopters | Shelters |
+|---|---|
+| Create an account and manage a profile | Register and manage a shelter profile |
+| Browse and filter available pets | Create and manage pet listings |
+| View pet details | Review applications for their pets |
+| Submit adoption applications | Update application statuses |
+| Track, edit, or cancel applications | Activate or deactivate listings |
+
+The API also includes an **ADMIN** role in its role model and security configuration.
 
 ## Tech stack
 
-- Angular 22
-- TypeScript
-- RxJS
-- Angular Router
-- Angular Reactive Forms / Forms
-- SCSS
-- Font Awesome
-- Vitest (configured test runner)
-
-
-
-For the cross-repository component diagram and request flows, see the [LoveFound system architecture](https://github.com/islemzaafouri/love-found-api/blob/main/docs/architecture.md).
-
-
-
-For the entity-relationship diagram and database overview, see the [LoveFound database design documentation](https://github.com/islemzaafouri/love-found-api/blob/main/docs/database-design.md).
-
-
-
-For a guided map of the frontend features, backend domains, and how they communicate, see the [LoveFound application structure documentation](https://github.com/islemzaafouri/love-found-api/blob/main/docs/application-structure.md).
-
-## Features
-
-### Public experience
-- Home page.
-- Browse available pets.
-- View pet details.
-- Filter pets by species.
-
-### Authentication
-- Adopter and shelter registration.
-- Login.
-- JWT-based authenticated requests.
-- Authentication and role guards for protected pages.
-
-### Adopter experience
-- View and update adopter profile.
-- Submit an adoption application.
-- View submitted applications.
-- Open application details, edit or cancel an application.
-
-### Shelter experience
-- Shelter dashboard.
-- View and update shelter profile.
-- Create, update, activate, and deactivate pet listings.
-- Review applications submitted for the shelter's pets.
-- Update application status.
+- **Framework:** Angular 22
+- **Language:** TypeScript
+- **Reactive programming:** RxJS
+- **Routing:** Angular Router with lazy-loaded feature routes
+- **Forms:** Reactive Forms / Forms
+- **Styling:** SCSS
+- **Icons:** Font Awesome
+- **Testing:** Vitest
 
 ## Application structure
 
-The source code is organized by feature, with shared infrastructure in `core` and reusable UI components in `shared`.
+The frontend is organized by feature. Shared infrastructure lives in `core`, while reusable UI elements live in `shared`.
 
 ```text
 src/app/
@@ -85,7 +64,7 @@ src/app/
         └── navbar/
 ```
 
-### Routing overview
+### Main routes
 
 | Route | Purpose | Access |
 |---|---|---|
@@ -96,24 +75,21 @@ src/app/
 | `/pets/create` | Create a pet listing | Shelter |
 | `/pets/update/:id` | Update a pet listing | Shelter |
 | `/dashboard` | Shelter dashboard | Shelter |
-| `/my-pets` | Shelter's pet listings | Shelter |
+| `/my-pets` | Shelter pet listings | Shelter |
 | `/profile/adopter` | Adopter profile | Adopter |
 | `/profile/shelter` | Shelter profile | Shelter |
-| `/applications/my` | My adoption applications | Adopter |
-| `/applications/my/:applicationId` | Application details | Adopter |
+| `/applications/my` | Adopter applications | Adopter |
 | `/applications/shelter` | Applications for shelter pets | Shelter |
-| `/applications/shelter/:applicationId` | Application details | Shelter |
-| `/applications/:petId` | Apply for a pet | Adopter |
 
-The application uses lazy-loaded feature routes and route guards for authentication and role-specific access.
+Protected routes use authentication and role guards. For the cross-layer architecture and request flows, see the [system architecture](https://github.com/islemzaafouri/love-found-api/blob/main/docs/architecture.md) and [application structure](https://github.com/islemzaafouri/love-found-api/blob/main/docs/application-structure.md).
 
 ## Run locally
 
 ### Prerequisites
 
-- Node.js (use a version compatible with the installed Angular CLI)
+- Node.js version compatible with the project's Angular CLI
 - npm
-- The [LoveFound API](https://github.com/islemzaafouri/love-found-api) running locally
+- MySQL and the [LoveFound API](https://github.com/islemzaafouri/love-found-api) running locally
 
 ### 1. Clone the repository
 
@@ -125,14 +101,10 @@ cd love-found-frontend
 ### 2. Install dependencies
 
 ```bash
-npm install
-```
-
-For reproducible installs, use:
-
-```bash
 npm ci
 ```
+
+Use `npm install` if you need to update or regenerate the dependency lockfile.
 
 ### 3. Start the development server
 
@@ -142,32 +114,31 @@ npm start
 
 Open [http://localhost:4200](http://localhost:4200).
 
-The API base URL is centralized in `src/environments/environment.ts` and `environment.development.ts`. The development build uses `http://localhost:8080/api`; the production configuration uses the relative `/api` path, intended for deployment behind a same-origin reverse proxy. Make sure the backend is configured and running before testing API-dependent features.
+The API base URL is centralized in `src/environments/environment.ts` and `environment.development.ts`. The development configuration targets `http://localhost:8080/api`. The production configuration uses the relative `/api` path and is intended for deployment behind a same-origin reverse proxy.
 
 ## Build and test
 
-Build the application:
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-Run unit tests:
+Run the test suite:
 
 ```bash
 npm test
 ```
 
-The production build output is generated in Angular's configured output directory under `dist/`.
+The production build is generated in Angular's configured output directory under `dist/`.
 
-## Screenshots
+## Documentation
 
-Screenshots of the application will be added here as the interface is finalized.
-
-## Related repository
-
-- [LoveFound API — Spring Boot backend](https://github.com/islemzaafouri/love-found-api)
+- [System architecture](https://github.com/islemzaafouri/love-found-api/blob/main/docs/architecture.md)
+- [Database design](https://github.com/islemzaafouri/love-found-api/blob/main/docs/database-design.md)
+- [Application structure](https://github.com/islemzaafouri/love-found-api/blob/main/docs/application-structure.md)
+- [Backend API repository](https://github.com/islemzaafouri/love-found-api)
 
 ## Project status
 
-LoveFound is an actively developed project. Features, routes, and UI details may change as development continues.
+LoveFound is an actively developed project. The repository documents the current frontend structure and implemented user flows; features and UI details may evolve as development continues.
