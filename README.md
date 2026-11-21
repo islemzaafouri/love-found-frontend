@@ -38,7 +38,7 @@ LoveFound provides dedicated experiences for visitors, adopters, and shelters.
 ![Adopter profile](docs/screenshots/06-adopter-profile.jpg)
 
 ### Shelter dashboard
-![Shelter dashboard](docs/screenshots/07-shelter-dashboard.jpg)
+![Shelter dashboard](docs/screenshots/shelter-dashboard.png)
 
 
 ## User experiences
