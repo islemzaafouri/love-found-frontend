@@ -15,7 +15,30 @@
 LoveFound is a pet adoption web application built around a simple idea: every animal deserves a safe, loving home. It connects adopters with shelters through a shared platform, making it easier to discover pets, submit adoption applications, and follow their progress.
 
 The frontend is developed with Angular using standalone components, lazy-loaded feature routes, and a feature-oriented structure. It communicates with the Spring Boot REST API and uses an HTTP interceptor to attach authentication information to protected requests.
-<img width="1217" height="730" alt="07-shelter-dashboard" src="https://github.com/user-attachments/assets/87bf7152-3152-48f1-9664-d29b8cf3b13e" />
+## Application screenshots
+
+LoveFound provides dedicated experiences for visitors, adopters, and shelters.
+
+### Homepage
+![LoveFound homepage](docs/screenshots/01-homepage.jpg)
+
+### Vision and mission
+![LoveFound vision and mission](docs/screenshots/02-vision-mission.jpg)
+
+### Homepage call to action and footer
+![LoveFound homepage call to action and footer](docs/screenshots/03-homepage-cta-footer.jpg)
+
+### Find a friend
+![Browse pets available for adoption](docs/screenshots/04-find-a-friend.jpg)
+
+### Adoption applications
+![Adopter application tracking](docs/screenshots/05-adoption-applications.jpg)
+
+### Adopter profile
+![Adopter profile](docs/screenshots/06-adopter-profile.jpg)
+
+### Shelter dashboard
+![Shelter dashboard](docs/screenshots/07-shelter-dashboard.jpg)
 
 
 ## User experiences
